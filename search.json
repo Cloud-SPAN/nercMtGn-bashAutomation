@@ -21,15 +21,15 @@
     "text": "asdf asdfasdsdf asdfa\n\n\nasdf asdfasdsdf asdfa\n\n\nasdf asdfasdsdf asdfa asdf asdfasdsdf asdfa asdf asdfasdsdf asdfa"
   },
   {
-    "objectID": "docs/navbar/codeofconduct.html",
-    "href": "docs/navbar/codeofconduct.html",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "As contributors and maintainers of this project, we pledge to follow the Carpentry Code of Conduct.\nInstances of abusive, harassing, or otherwise unacceptable behavior may be reported by following our reporting guidelines."
-  },
-  {
     "objectID": "docs/navbar/lessons.html",
     "href": "docs/navbar/lessons.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site 23"
+  },
+  {
+    "objectID": "docs/navbar/extras.html",
+    "href": "docs/navbar/extras.html",
     "title": "About",
     "section": "",
     "text": "About this site 23"
@@ -42,15 +42,15 @@
     "text": "About this site 23"
   },
   {
-    "objectID": "docs/navbar/about.html",
-    "href": "docs/navbar/about.html",
-    "title": "About",
+    "objectID": "docs/navbar/codeofconduct.html",
+    "href": "docs/navbar/codeofconduct.html",
+    "title": "Code of Conduct",
     "section": "",
-    "text": "About this site 23"
+    "text": "As contributors and maintainers of this project, we pledge to follow the Carpentry Code of Conduct.\nInstances of abusive, harassing, or otherwise unacceptable behavior may be reported by following our reporting guidelines."
   },
   {
-    "objectID": "docs/navbar/extras.html",
-    "href": "docs/navbar/extras.html",
+    "objectID": "docs/navbar/about.html",
+    "href": "docs/navbar/about.html",
     "title": "About",
     "section": "",
     "text": "About this site 23"
