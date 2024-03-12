@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Automating Metagenomics Analyses with Bash Scripts",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "docs/navbar/setup.html",
+    "href": "docs/navbar/setup.html",
+    "title": "Setup",
+    "section": "",
+    "text": "This is supposed to the Setup page.\n\n\nasdf asdfasdsdf asdfa\n\n\nasdf asdfasdsdf asdfa\n\n\nasdf asdfasdsdf asdfa asdf asdfasdsdf asdfa asdf asdfasdsdf asdfa"
+  },
+  {
+    "objectID": "docs/navbar/setup.html#this-is-smaller-little-title",
+    "href": "docs/navbar/setup.html#this-is-smaller-little-title",
+    "title": "Setup",
+    "section": "",
+    "text": "asdf asdfasdsdf asdfa\n\n\nasdf asdfasdsdf asdfa\n\n\nasdf asdfasdsdf asdfa asdf asdfasdsdf asdfa asdf asdfasdsdf asdfa"
+  },
+  {
+    "objectID": "docs/navbar/codeofconduct.html",
+    "href": "docs/navbar/codeofconduct.html",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "As contributors and maintainers of this project, we pledge to follow the Carpentry Code of Conduct.\nInstances of abusive, harassing, or otherwise unacceptable behavior may be reported by following our reporting guidelines."
+  },
+  {
+    "objectID": "docs/navbar/lessons.html",
+    "href": "docs/navbar/lessons.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site 23"
+  },
+  {
+    "objectID": "docs/navbar/license.html",
+    "href": "docs/navbar/license.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site 23"
+  },
+  {
+    "objectID": "docs/navbar/about.html",
+    "href": "docs/navbar/about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site 23"
+  },
+  {
+    "objectID": "docs/navbar/extras.html",
+    "href": "docs/navbar/extras.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site 23"
+  }
+]
