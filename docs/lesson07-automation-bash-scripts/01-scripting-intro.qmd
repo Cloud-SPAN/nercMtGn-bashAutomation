@@ -1,0 +1,7 @@
+---
+title: "Introduction to Bash Scripting"
+page-navigation: false
+---
+# Overview
+
+The software and data used for analysis during the course are hosted on an Amazon Web Services (AWS) virtual machine (VM) instance. A copy of such instance that requires no previous setup by you will be made available to you at no cost by the Cloud-SPAN team.

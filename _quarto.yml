@@ -2,16 +2,22 @@ project:
   type: website
   output-dir: _site
   
-date: today
-date-format: "YYYY"
+#date: today
+#date-format: "YYYY"
 
 website:
   title: "Automating Metagenomics Analyses with Bash Scripts"
+  page-navigation: true         # prev and next options at the bottom of each page
+  back-to-top-navigation: true
+  reader-mode: true  
+  repo-url: https://github.com/Cloud-SPAN/nercMtGn-bashAutomation
+  repo-actions: [edit, issue]
   page-footer:
     left: |
-      Licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) 2021–{{<meta date>}} by [Cloud-SPAN](https://cloud-span.york.ac.uk/)\
-      Licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) 2018–{{<meta date>}} by the [Carpentries](https://carpentries.org/)\
-      Licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) 2016–2018 by the [Data Carpentry](https://datacarpentry.org/)      
+      Licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) 2021–24 by [Cloud-SPAN](https://cloud-span.york.ac.uk/)    
+#      Licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) 2021–{{<meta date>}} by [Cloud-SPAN](https://cloud-span.york.ac.uk/)\
+#      Licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) 2018–{{<meta date>}} by the [Carpentries](https://carpentries.org/)\
+#      Licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) 2016–2018 by the [Data Carpentry](https://datacarpentry.org/)      
     center:
       - text: "About"
         href: about.qmd
@@ -32,7 +38,7 @@ website:
         href: https://quarto.org/docs/blog/index.xml
         aria-label: Quarto Blog RSS
   navbar:
-    background: light
+    background: lightblue
     logo: images/cloud-span-icon.png
     logo-alt: "Cloud-SPAN logo."
     title: false
@@ -41,35 +47,109 @@ website:
       - text: Home  
         href: index.qmd
       - text: Lessons
-        href: docs/navbar/lessons.qmd
+        menu: 
+          - text: Course Overview
+            href: index.qmd
+          - text: Files and Directories
+            href: docs/lesson01-files-and-directories/index.qmd
+          - text: Using the Command Line
+            href: docs/lesson02-using-the-command-line/index.qmd
+          - text: "QC & Assembly"
+            href: docs/lesson03-qc-assembly/index.qmd
+          - text: Polishing
+            href: docs/lesson04-polishing/index.qmd
+          - text: Binning and Functional Annotation
+            href: docs/lesson05-binning-functional-annotation/index.qmd
+          - text: Taxonomic Annotations
+            href: docs/lesson06-taxonomic-annotations/index.qmd
+          - text: Automating Analyses with Bash Scripts
+            href: docs/lesson07-automation-bash-scripts/index.qmd
       - text: Setup
-        href: docs/navbar/setup.qmd
+        href: docs/miscellanea/setup.qmd
       - text: Extras
-        href: docs/navbar/extras.qmd
+        menu: 
+          - text: Reference
+            href: docs/miscellanea/reference.qmd
+          - text: About
+            href: docs/miscellanea/about.qmd
+          - text: Data
+            href: docs/miscellanea/data.qmd
+          - text: Frequently Asked Questions
+            href: docs/miscellanea/faq.qmd
+          - text: Instructor Notes
+            href: docs/miscellanea/instructornotes.qmd          
       - text: License
-        href: docs/navbar/license.qmd
+        href: docs/miscellanea/license.qmd
       - text: Code of Conduct
-        href: docs/navbar/codeofconduct.qmd
-      - text: Help
-        menu:
-          - text: "Report a Bug"
-            icon: "bug"
-            href: "https://github.com/quarto-dev/quarto-cli/issues"
-          - text: "Ask a Question"
-            icon: "chat-right-text"
-            href: "https://github.com/quarto-dev/quarto-cli/discussions"
-          - text: "FAQ"
-            icon: "question-circle"
-            href: docs/faq/index.qmd
-      
+        href: docs/miscellanea/codeofconduct.qmd
+#      - text: Help
+#        menu:
+#          - text: "Report a Bug"
+#            icon: "bug"
+#            href: "https://github.com/quarto-dev/quarto-cli/issues"
+#          - text: "Ask a Question"
+#            icon: "chat-right-text"
+#            href: "https://github.com/quarto-dev/quarto-cli/discussions"
+#          - text: "FAQ"
+#            icon: "question-circle"
+#            href: docs/faq/index.qmd
+  
+  sidebar:
+    style: "docked"
+    collapse-level: 1
+    pinned: true
+    contents:
+      - section: Files and Directories
+        href: docs/lesson01-files-and-directories/index.qmd
+        contents: 
+          - docs/lesson01-files-and-directories/01-understanding-file-systems.qmd 
+          - docs/lesson01-files-and-directories/02-logging-onto-cloud.qmd
+          - docs/lesson01-files-and-directories/03-shell-introduction.qmd
+      - section: "Using the Command Line"
+        href: docs/lesson02-using-the-command-line/index.qmd
+        contents: 
+          - docs/lesson02-using-the-command-line/01-navigating-file-directories.qmd
+          - docs/lesson02-using-the-command-line/02-working-with-file.qmd
+          - docs/lesson02-using-the-command-line/03-redirection.qmd
+      - section: "QC & Assembly"
+        href: docs/lesson03-qc-assembly/index.qmd
+        contents: 
+          - docs/lesson03-qc-assembly/00-introduction-meta.qmd
+          - docs/lesson03-qc-assembly/01-QC-quality-raw-reads.qmd
+          - docs/lesson03-qc-assembly/02-assembly.qmd
+      - section: "Polishing"
+        href: docs/lesson04-polishing/index.qmd
+        contents: 
+          - docs/lesson04-polishing/01-polishing-assembly.qmd
+          - docs/lesson04-polishing/02-QC-polished-assembly.qmd
+      - section:  "Binning & Functional Annotation"
+        href: docs/lesson05-binning-functional-annotation/index.qmd
+        contents: 
+          - docs/lesson05-binning-functional-annotation/01-binning.qmd
+          - docs/lesson05-binning-functional-annotation/02-binning_quality.qmd
+          - docs/lesson05-binning-functional-annotation/03-Functional-annotation.qmd
+      - section: "Taxonomic Annotations"
+        href: docs/lesson06-taxonomic-annotations/index.qmd
+        contents: 
+          - docs/lesson06-taxonomic-annotations/01-taxonomic.qmd
+          - docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.qmd
+          - docs/lesson06-taxonomic-annotations/03-hands_on-diversity.qmd
+      - section: "Automating Analyses with Bash Scripts"
+        href: docs/lesson07-automation-bash-scripts/index.qmd
+        contents: 
+          - docs/lesson07-automation-bash-scripts/01-scripting-intro.qmd
+          - docs/lesson07-automation-bash-scripts/02-base-automation-script.qmd
+
 format:
   html:
     theme: cosmo
     css: styles.css
+#    theme:
+#    - styles.scss
     toc: true
 
 execute:
   freeze: auto
 
-
+editor: visual
 

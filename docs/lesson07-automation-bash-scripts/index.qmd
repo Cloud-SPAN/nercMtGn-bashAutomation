@@ -1,0 +1,15 @@
+---
+title: "Automating Analyses with Bash Scripts"
+subtitle: "[Metagenomics Environmental Application](/index.qmd)"
+# title-block-banner: true
+---
+## Overview
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+
+## Section 1 
+
+
+## Section 2
+
+## Section 3 
