@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automating Metagenomics Analyses with Bash Scripts - Metagenomics</title>
+<title>Automating Metagenomics Analyses with Bash Scripts - Logging onto the Cloud</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,21 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/lesson01-files-and-directories/03-shell-introduction.html" rel="next">
+<link href="../../docs/lesson01-files-and-directories/01-understanding-file-systems.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -77,8 +79,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/cloud-span-icon.png" alt="Cloud-SPAN logo." class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/cloud-span-icon.png" alt="Cloud-SPAN logo." class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -88,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -97,41 +99,41 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-lessons">    
         <li>
-    <a class="dropdown-item" href="./index.html">
+    <a class="dropdown-item" href="../../index.html">
  <span class="dropdown-text">Course Overview</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson01-files-and-directories/index.html">
+    <a class="dropdown-item" href="../../docs/lesson01-files-and-directories/index.html">
  <span class="dropdown-text">Files and Directories</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson02-using-the-command-line/index.html">
+    <a class="dropdown-item" href="../../docs/lesson02-using-the-command-line/index.html">
  <span class="dropdown-text">Using the Command Line</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson03-qc-assembly/index.html">
+    <a class="dropdown-item" href="../../docs/lesson03-qc-assembly/index.html">
  <span class="dropdown-text">QC &amp; Assembly</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson04-polishing/index.html">
+    <a class="dropdown-item" href="../../docs/lesson04-polishing/index.html">
  <span class="dropdown-text">Polishing</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson05-binning-functional-annotation/index.html">
+    <a class="dropdown-item" href="../../docs/lesson05-binning-functional-annotation/index.html">
  <span class="dropdown-text">Binning and Functional Annotation</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson06-taxonomic-annotations/index.html">
+    <a class="dropdown-item" href="../../docs/lesson06-taxonomic-annotations/index.html">
  <span class="dropdown-text">Taxonomic Annotations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson07-automation-bash-scripts/index.html">
+    <a class="dropdown-item" href="../../docs/lesson07-automation-bash-scripts/index.html">
  <span class="dropdown-text">Automating Analyses with Bash Scripts</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./docs/miscellanea/setup.html"> 
+    <a class="nav-link" href="../../docs/miscellanea/setup.html"> 
 <span class="menu-text">Setup</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -140,33 +142,33 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-extras">    
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/reference.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/reference.qmd">
  <span class="dropdown-text">Reference</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/about.html">
+    <a class="dropdown-item" href="../../docs/miscellanea/about.html">
  <span class="dropdown-text">About</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/data.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/data.qmd">
  <span class="dropdown-text">Data</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/faq.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/faq.qmd">
  <span class="dropdown-text">Frequently Asked Questions</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/instructornotes.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/instructornotes.qmd">
  <span class="dropdown-text">Instructor Notes</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./docs/miscellanea/license.html"> 
+    <a class="nav-link" href="../../docs/miscellanea/license.html"> 
 <span class="menu-text">License</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./docs/miscellanea/codeofconduct.html"> 
+    <a class="nav-link" href="../../docs/miscellanea/codeofconduct.html"> 
 <span class="menu-text">Code of Conduct</span></a>
   </li>  
 </ul>
@@ -185,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Metagenomics</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson01-files-and-directories/index.html">Files and Directories</a></li><li class="breadcrumb-item"><a href="../../docs/lesson01-files-and-directories/02-logging-onto-cloud.html">Logging onto the Cloud</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -199,28 +201,28 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson01-files-and-directories/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson01-files-and-directories/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Files and Directories</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson01-files-and-directories/01-understanding-file-systems.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson01-files-and-directories/01-understanding-file-systems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Understanding your file system</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson01-files-and-directories/02-logging-onto-cloud.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson01-files-and-directories/02-logging-onto-cloud.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Logging onto the Cloud</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson01-files-and-directories/03-shell-introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson01-files-and-directories/03-shell-introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introducing the Shell</span></a>
   </div>
 </li>
@@ -228,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson02-using-the-command-line/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson02-using-the-command-line/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using the Command Line</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -237,19 +239,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson02-using-the-command-line/01-navigating-file-directories.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson02-using-the-command-line/01-navigating-file-directories.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Navigating Files and Directories</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson02-using-the-command-line/02-working-with-file.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson02-using-the-command-line/02-working-with-file.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working with Files and Directories</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson02-using-the-command-line/03-redirection.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson02-using-the-command-line/03-redirection.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Redirection</span></a>
   </div>
 </li>
@@ -257,7 +259,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson03-qc-assembly/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson03-qc-assembly/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC &amp; Assembly</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -266,19 +268,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson03-qc-assembly/00-introduction-meta.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson03-qc-assembly/00-introduction-meta.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to Metagenomics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assessing Read Quality, Trimming and Filtering</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson03-qc-assembly/02-assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson03-qc-assembly/02-assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Metagenome Assembly</span></a>
   </div>
 </li>
@@ -286,7 +288,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson04-polishing/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson04-polishing/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Polishing</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -295,13 +297,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson04-polishing/01-polishing-assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson04-polishing/01-polishing-assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Polishing an assembly</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson04-polishing/02-QC-polished-assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson04-polishing/02-QC-polished-assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC polished assembly</span></a>
   </div>
 </li>
@@ -309,7 +311,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson05-binning-functional-annotation/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson05-binning-functional-annotation/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Binning &amp; Functional Annotation</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -318,19 +320,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson05-binning-functional-annotation/01-binning.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson05-binning-functional-annotation/01-binning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Metagenome Binning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson05-binning-functional-annotation/02-binning_quality.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson05-binning-functional-annotation/02-binning_quality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC of metagenome bins</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson05-binning-functional-annotation/03-Functional-annotation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson05-binning-functional-annotation/03-Functional-annotation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Functional annotation</span></a>
   </div>
 </li>
@@ -338,7 +340,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson06-taxonomic-annotations/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson06-taxonomic-annotations/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Taxonomic Annotations</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -347,19 +349,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson06-taxonomic-annotations/01-taxonomic.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson06-taxonomic-annotations/01-taxonomic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Taxonomic Assignment</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Diversity Tackled With R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Taxonomic Analysis with R</span></a>
   </div>
 </li>
@@ -367,7 +369,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson07-automation-bash-scripts/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson07-automation-bash-scripts/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Automating Analyses with Bash Scripts</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -376,13 +378,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson07-automation-bash-scripts/01-scripting-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson07-automation-bash-scripts/01-scripting-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to Bash Scripting</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson07-automation-bash-scripts/02-base-automation-script.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson07-automation-bash-scripts/02-base-automation-script.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Base Automation Script</span></a>
   </div>
 </li>
@@ -398,20 +400,21 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
-  <li><a href="#course-format" id="toc-course-format" class="nav-link" data-scroll-target="#course-format">Course format</a></li>
-  <li><a href="#course-overview" id="toc-course-overview" class="nav-link" data-scroll-target="#course-overview">Course Overview</a></li>
+  <li><a href="#important-note" id="toc-important-note" class="nav-link active" data-scroll-target="#important-note">Important Note</a></li>
+  <li><a href="#background-to-aws" id="toc-background-to-aws" class="nav-link" data-scroll-target="#background-to-aws">Background to AWS</a></li>
+  <li><a href="#open-a-terminal-and-change-the-access-permissions-of-your-login-key-file" id="toc-open-a-terminal-and-change-the-access-permissions-of-your-login-key-file" class="nav-link" data-scroll-target="#open-a-terminal-and-change-the-access-permissions-of-your-login-key-file">Open a Terminal and change the access permissions of your login key file</a></li>
+  <li><a href="#login-into-your-instance-with-ssh" id="toc-login-into-your-instance-with-ssh" class="nav-link" data-scroll-target="#login-into-your-instance-with-ssh">Login into your instance with ssh</a></li>
+  <li><a href="#logging-off-your-cloud-instance" id="toc-logging-off-your-cloud-instance" class="nav-link" data-scroll-target="#logging-off-your-cloud-instance">Logging off your cloud instance</a></li>
+  <li><a href="#subsequent-logins-to-your-aws-instance" id="toc-subsequent-logins-to-your-aws-instance" class="nav-link" data-scroll-target="#subsequent-logins-to-your-aws-instance">Subsequent logins to your AWS instance</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson01-files-and-directories/02-logging-onto-cloud.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson01-files-and-directories/index.html">Files and Directories</a></li><li class="breadcrumb-item"><a href="../../docs/lesson01-files-and-directories/02-logging-onto-cloud.html">Logging onto the Cloud</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Metagenomics</h1>
-<p class="subtitle lead">Environmental Applications</p>
+<h1 class="title">Logging onto the Cloud</h1>
 </div>
 
 
@@ -428,101 +431,123 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This hands-on, online course teaches data analysis for metagenomics projects. It is aimed at those with little or no experience of using high performance computing (HPC) for data analysis. In the course we will cover:</p>
+<script language="javascript" type="text/javascript">
+function set_page_view_defaults() {
+    document.getElementById('div_aws_win').style.display = 'block';
+    document.getElementById('div_aws_unix').style.display = 'none';
+};
+
+function change_content_by_platform(form_control){
+    if (!form_control || document.getElementById(form_control).value == 'aws_win') {
+        set_page_view_defaults();
+    } else if (document.getElementById(form_control).value == 'aws_unix') {
+        document.getElementById('div_aws_win').style.display = 'none';
+        document.getElementById('div_aws_unix').style.display = 'block';
+        document.getElementById('div_hpc').style.display = 'none';
+        document.getElementById('div_cyverse').style.display = 'none';
+    } else {
+        alert("Error: Missing platform value for 'change_content_by_platform()' script!");
+    }
+}
+
+window.onload = set_page_view_defaults;
+</script>
+<section id="important-note" class="level2">
+<h2 class="anchored" data-anchor-id="important-note">Important Note</h2>
+<p>This lesson covers how to log into, and out of, an <em>already running</em> AWS instance.</p>
+</section>
+<section id="background-to-aws" class="level2">
+<h2 class="anchored" data-anchor-id="background-to-aws">Background to AWS</h2>
+<p>An Amazon Web Services (AWS) instance is a <strong>remote computer</strong> that runs on AWS infrastructure and that is accessible from any laptop or desktop as described below. For this course, an AWS instance will have been created for you by the Cloud-SPAN team.</p>
+<p>To login into your AWS instance for this course, you’ll need: - the name of your instance and a login key file, both of which you received via email - the shell/terminal application — <strong>Windows users</strong> should have already installed the <em>Git Bash</em> shell; otherwise follow the directions in the <a href="../setup">Setup</a> - the <em>secure shell</em> (<strong>ssh</strong>) application, which is readily available in MacOS, Linux and Windows. <strong>Windows users</strong> will use ssh through Git Bash.</p>
+<p>As the name implies, <strong>ssh</strong> provides you with a secure (encrypted) way to use a remote <em>shell</em>, as simple as this (you do not have to type this yet):</p>
+<pre><code>$ ssh -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk</code></pre>
+<p>{: .bash}</p>
+<p>A few seconds after you enter that command to the shell in your computer, you will be logged into your AWS instance and start using a (Linux) shell running in your instance.</p>
+</section>
+<section id="open-a-terminal-and-change-the-access-permissions-of-your-login-key-file" class="level2">
+<h2 class="anchored" data-anchor-id="open-a-terminal-and-change-the-access-permissions-of-your-login-key-file">Open a Terminal and change the access permissions of your login key file</h2>
+<ol type="1">
+<li><p><strong>Open the <em>cloudspan</em> folder you created for the course</strong></p>
+<p>Open your file manager and navigate to the <code>cloudspan</code> folder (hint: we recommended you make the folder in your <em>Desktop</em> directory - but you might have made it somewhere else). If you cannot find the folder, you can remind yourself where it is stored by looking at the absolute path you wrote down in the previous episode.</p>
+<p>The folder should contain the login key file we downloaded in the previous episode and nothing else.</p></li>
+<li><p><strong>Right-click and open your machine’s command line interface</strong></p>
+<p>Now we can open the command line.</p>
+<p>For Windows users:</p>
 <ul>
-<li>navigating file directories and using the command line</li>
-<li>logging into a remote cloud instance</li>
-<li>using common commands and running analysis programs in the command line</li>
-<li>what is metagenomics?</li>
-<li>following a metagenomics analysis workflow including:
-<ul>
-<li>performing quality control on reads</li>
-<li>assembly of reads into a metagenome</li>
-<li>improving your assembly with polishing</li>
-<li>binning into species/metagenome-assembled genomes (MAGs)</li>
-<li>taxonomic assignment and functional annotation using your binned reads</li>
-</ul></li>
+<li>Right click anywhere inside the blank space of the file manager, then select <strong>Git Bash Here</strong>.</li>
 </ul>
-<p>The course is taught as a mixture of live coding, online lectures, self-study and drop-in sessions.</p>
-<section id="prerequisites" class="level2">
-<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Biological concepts and software setup
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This course assumes no prior experience with the tools covered in the workshop but learners are expected to have some familiarity with biological concepts, including the concept of genomes and microbiomes. Participants should bring their own laptops and plan to participate actively.</p>
-<p>To get started, follow the directions in the Setup tab to get access to the required software and data for this workshop. <strong>Windows users</strong> need to install Git Bash in their laptop. <strong>Mac users</strong> may need to configure the <strong>terminal</strong> program in their laptop to use the Bash shell.</p>
-</div>
-</div>
+<p>For Mac users:</p>
+<p>You have two options.</p>
+<p>EITHER</p>
+<ul>
+<li>Open <strong>Terminal</strong> in one window and type <code>cd</code> followed by a space. Do not press enter! Now open <strong>Finder</strong> in another window. Drag and drop the <code>cloudspan</code> folder from the Finder to the Terminal. You should see the file path leading to your <code>cloudspan</code> folder appear. Now press enter to navigate to the folder.</li>
+</ul>
+<p>OR</p>
+<ul>
+<li>Open <strong>Terminal</strong> and type <code>cd</code> followed by the absolute path that leads to your <code>cloudspan</code> folder. Press enter.</li>
+</ul>
+<p>A new window will open - this is your command line interface, also known as the shell or the terminal. Once the terminal opens, it will display/output the <strong>command prompt</strong> to signal that it is ready to accept commands (instructions). The <strong>command prompt</strong> is 1 or 2 lines depending on your operating system (Windows, Linux, MacOS) and will be similar to the following.</p>
+<p>Typical command prompt for Windows Git Bash users:</p>
+<pre><code>username@machineid MINGW64 ~
+$</code></pre>
+<p>{: .output}</p>
+<p>Obviously “username” and “machineid” in the Output box above will be different when you open a terminal and will correspond to the actual username and the name of the machine you are using.</p>
+<p>The character <code>$</code> is the typical ending of user prompts (the ending of admin users prompts is typically <code>#</code>). Commands you type will follow the <code>$</code>.</p>
+<p>Typical command prompt for Linux users:</p>
+<pre><code>username@machineid:~ $</code></pre>
+<p>{: .output}</p>
+<p>Typical command prompt for MacOS users:</p>
+<pre><code>machineid:~ username $</code></pre>
+<p>{: .output}</p>
+<p>In the rest of this course we will show only the <code>$</code> to represent the prompt.</p></li>
+<li><p><strong>Check that you are in the right folder</strong></p>
+<p>The terminal should have automatically set our <code>cloudspan</code> folder as the current working directory. This is because we asked the terminal to open from a specific location.</p>
+<p>You can check if the working directory is set correctly by looking at the file path which is defined to the left of your command prompt (<code>$</code>). It should display the second half of the absolute path we wrote down previously, usually starting after your computer’s username, and always ending in <code>/cloudspan</code>.</p>
+<p>You can also check by typing the letters <code>ls</code> after the command prompt and pressing enter. This will list all the files in the working directory AKA all files in the <code>cloudspan</code> folder. In our case, this should be just one file, the login key ending in <code>.pem</code>.</p></li>
+<li><p><strong>Change the access permissions of your login key file</strong></p>
+<p>Enter the following command to change the access permissions of your file but <strong>replace</strong> NNN with the actual number in your file name: ~~~ $ chmod 400 login-key-instanceNNN.pem&nbsp; ~~~ {: .bash}</p>
+<p>The command <code>chmod</code> (change access mode) makes your login key file accessible to you only (and non-accessible to any other potential users of your computer), a condition that is required and checked by the program <code>ssh</code> that you will use next to login to your AWS instance. You will learn about file access permissions later in the course.</p></li>
+</ol>
 </section>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-About the data used in the course
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This course uses data from a 2022 paper published in BMC Environmental Microbiome titled <a href="https://environmentalmicrobiome.biomedcentral.com/articles/10.1186/s40793-022-00424-2">In-depth characterization of denitrifier communities across different soil ecosystems in the tundra</a>. In this course we will compare data from two of the sites studied.</p>
-<p>You can read more about the data used in the course <a href="data/index.html">here</a>.</p>
-</div>
-</div>
+<section id="login-into-your-instance-with-ssh" class="level2">
+<h2 class="anchored" data-anchor-id="login-into-your-instance-with-ssh">Login into your instance with ssh</h2>
+<ol type="1">
+<li><p>Copy and paste the command in the Code box below to your <em>terminal</em>, but <strong>replace</strong> <code>NNN</code> with the number in your login key file name.</p>
+<p>Windows Git Bash users only:</p>
+<ul>
+<li><strong>copy</strong> the command the usual Windows way: (1) highlight it with the mouse pointer while pressing the mouse left button and (2) press Ctrl-c (keys Ctrl and c simultaneously).</li>
+<li>but <strong>paste</strong> it the Linux/Unix way: by pressing the mouse middle button while hovering the mouse pointer over the Git Bash window. (Try with the right button if the middle button doesn’t work.) Alternatively, right click and select <code>paste</code>.</li>
+</ul>
+<pre><code>$ ssh -i login-key-instanceNNN.pem&nbsp; csuser@instanceNNN.cloud-span.aws.york.ac.uk</code></pre>
+<p>{: .bash}</p>
+<p><em>Be sure to replace</em> <code>NNN</code> <em>twice.</em> You can use the left and right arrow keys to move to where NNN is.</p>
+<p>The <code>-i</code> option tells <code>ssh</code> the identity file containing the key to send to your AWS instance for it to check that you have access permissions to connect as an <em>ssh client</em>.</p>
+<p><strong>NB</strong>: <code>ssh</code> looks for the identity file in the directory where you are, Desktop/cloudspan (that you moved to with the command <code>cd</code> above), which is the same directory wherein you downloaded your login key file.</p></li>
+<li><p>The terminal will display a security message, after you enter the <code>ssh</code> command, <em>similar</em> to the one below:</p>
+<pre><code>The authenticity of host 'instanceNNN-cloud-span.aws.york.ac.uk (52.211.132.120)' can't be established.ECDSA key fingerprint is SHA256:8N054prkkCeM4GCDSsa0AUnSQw5ngBQHbOR40FqfqLg.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?&nbsp;</code></pre>
+<p>{: .output}</p>
+<p>Type <strong>yes</strong> to continue and get connected to your AWS instance.</p>
+<p>The terminal will display a few messages and at the end the <strong>prompt</strong> of the <strong>shell running</strong> on your Linux AWS instance:</p>
+<pre><code>...
+csuser@instanceNNN:~ $</code></pre>
+<p>{: .output}</p>
+<p>Note that you did not need to give a password to login to your instance — you are using your login-key file for authentication.</p></li>
+</ol>
 </section>
-<section id="course-format" class="level2">
-<h2 class="anchored" data-anchor-id="course-format">Course format</h2>
-<p>This workshop is designed to be run on pre-imaged Amazon Web Services (AWS) instances. All the software and data used in the workshop are hosted on an Amazon Machine Image (AMI). We will give you details as to how to access these instances after registration.</p>
-<p>The course will take place over three weeks and will combine live coding and teaching with offline work. We will guide you through the analysis each session but some steps may need to completed offline due to the amount of time they take to complete. There will also be drop-in sessions to offer support and troubleshooting help, and a Slack workspace for questions.</p>
+<section id="logging-off-your-cloud-instance" class="level2">
+<h2 class="anchored" data-anchor-id="logging-off-your-cloud-instance">Logging off your cloud instance</h2>
+<p>Logging off your instance is a lot like logging out of your local computer but it doesn’t shut the computer off. <strong>Be aware that AWS instances accrue charges whenever they are running, even if you are logged off</strong>. Today, however, you do not need to worry about this!</p>
+<p>To log off, use the <code>exit</code> command in the same terminal you connected with. This will close the connection, and your terminal will go back to showing your local computer prompt, for example:</p>
+<pre><code>csuser@instanceNNN:~ $ exit</code></pre>
+<p>{: .bash} ~~~ logout Connection to instance05-gc.cloud-span.aws.york.ac.uk closed. username@machineid $ ~~~ {: .output}</p>
 </section>
-<section id="course-overview" class="level2">
-<h2 class="anchored" data-anchor-id="course-overview">Course Overview</h2>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Overview</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="./docs/lesson01-files-and-directories/index.html">Files and Directories</a></td>
-<td>Learn about files and directories, log onto a cloud instance and get a basic introduction to the shell.</td>
-</tr>
-<tr class="even">
-<td><a href="./docs/lesson02-using-the-command-line/index.html">Using the Command Line</a></td>
-<td>Learn more about using the shell to navigate directories, manipulate and search files, and combine existing commands to do new things.</td>
-</tr>
-<tr class="odd">
-<td><a href="./docs/lesson03-qc-assembly/index.html">QC &amp; Assembly</a></td>
-<td>How to quality control and assemble a genome.</td>
-</tr>
-<tr class="even">
-<td><a href="./docs/lesson04-polishing/index.html">Polishing</a></td>
-<td>How to use short reads to polish your metagenome assembly</td>
-</tr>
-<tr class="odd">
-<td><a href="./docs/lesson05-binning-functional-annotation/index.html">Binning &amp; Functional Annotation</a></td>
-<td>How to separate an assembly into MAGs and add functional annotation to these MAGs.</td>
-</tr>
-<tr class="even">
-<td><a href="./docs/lesson06-taxonomic-annotations/index.html">Taxonomic Annotations</a></td>
-<td>How to add taxonomic annotations onto contigs in an assembly.</td>
-</tr>
-<tr class="odd">
-<td><a href="./docs/lesson07-automation-bash-scripts/index.html">Automating Analyses with Bash Scripts</a></td>
-<td>How to automate the analyses tasks in the previous lessons using Bash scripts.</td>
-</tr>
-</tbody>
-</table>
+<section id="subsequent-logins-to-your-aws-instance" class="level2">
+<h2 class="anchored" data-anchor-id="subsequent-logins-to-your-aws-instance">Subsequent logins to your AWS instance</h2>
+<p>To login back to your instance, open a terminal, make sure you are in your <code>cloudspan</code> folder and <code>ssh</code> as before:</p>
+<pre><code>$ ssh -i login-key-instanceNNN.pem&nbsp; csuser@instanceNNN.cloud-span.aws.york.ac.uk</code></pre>
+<p>{: .bash}</p>
 
 
 </section>
@@ -937,6 +962,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/lesson01-files-and-directories/01-understanding-file-systems.html" class="pagination-link" aria-label="Understanding your file system">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Understanding your file system</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/lesson01-files-and-directories/03-shell-introduction.html" class="pagination-link" aria-label="Introducing the Shell">
+        <span class="nav-page-text">Introducing the Shell</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -946,27 +983,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="./about.qmd">
+    <a class="nav-link" href="../../about.qmd">
 <p>About</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./docs/faq/index.qmd">
+    <a class="nav-link" href="../../docs/faq/index.qmd">
 <p>FAQ</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./license.qmd">
+    <a class="nav-link" href="../../license.qmd">
 <p>License</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./trademark.qmd">
+    <a class="nav-link" href="../../trademark.qmd">
 <p>Trademark</p>
 </a>
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson01-files-and-directories/02-logging-onto-cloud.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

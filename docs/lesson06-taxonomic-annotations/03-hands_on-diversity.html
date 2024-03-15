@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automating Metagenomics Analyses with Bash Scripts - Metagenomics</title>
+<title>Automating Metagenomics Analyses with Bash Scripts - Taxonomic Analysis with R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,21 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/lesson07-automation-bash-scripts/index.html" rel="next">
+<link href="../../docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -66,8 +68,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -77,8 +108,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/cloud-span-icon.png" alt="Cloud-SPAN logo." class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/cloud-span-icon.png" alt="Cloud-SPAN logo." class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -88,7 +119,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -97,41 +128,41 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-lessons">    
         <li>
-    <a class="dropdown-item" href="./index.html">
+    <a class="dropdown-item" href="../../index.html">
  <span class="dropdown-text">Course Overview</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson01-files-and-directories/index.html">
+    <a class="dropdown-item" href="../../docs/lesson01-files-and-directories/index.html">
  <span class="dropdown-text">Files and Directories</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson02-using-the-command-line/index.html">
+    <a class="dropdown-item" href="../../docs/lesson02-using-the-command-line/index.html">
  <span class="dropdown-text">Using the Command Line</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson03-qc-assembly/index.html">
+    <a class="dropdown-item" href="../../docs/lesson03-qc-assembly/index.html">
  <span class="dropdown-text">QC &amp; Assembly</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson04-polishing/index.html">
+    <a class="dropdown-item" href="../../docs/lesson04-polishing/index.html">
  <span class="dropdown-text">Polishing</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson05-binning-functional-annotation/index.html">
+    <a class="dropdown-item" href="../../docs/lesson05-binning-functional-annotation/index.html">
  <span class="dropdown-text">Binning and Functional Annotation</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson06-taxonomic-annotations/index.html">
+    <a class="dropdown-item" href="../../docs/lesson06-taxonomic-annotations/index.html">
  <span class="dropdown-text">Taxonomic Annotations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson07-automation-bash-scripts/index.html">
+    <a class="dropdown-item" href="../../docs/lesson07-automation-bash-scripts/index.html">
  <span class="dropdown-text">Automating Analyses with Bash Scripts</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./docs/miscellanea/setup.html"> 
+    <a class="nav-link" href="../../docs/miscellanea/setup.html"> 
 <span class="menu-text">Setup</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -140,33 +171,33 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-extras">    
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/reference.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/reference.qmd">
  <span class="dropdown-text">Reference</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/about.html">
+    <a class="dropdown-item" href="../../docs/miscellanea/about.html">
  <span class="dropdown-text">About</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/data.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/data.qmd">
  <span class="dropdown-text">Data</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/faq.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/faq.qmd">
  <span class="dropdown-text">Frequently Asked Questions</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/instructornotes.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/instructornotes.qmd">
  <span class="dropdown-text">Instructor Notes</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./docs/miscellanea/license.html"> 
+    <a class="nav-link" href="../../docs/miscellanea/license.html"> 
 <span class="menu-text">License</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./docs/miscellanea/codeofconduct.html"> 
+    <a class="nav-link" href="../../docs/miscellanea/codeofconduct.html"> 
 <span class="menu-text">Code of Conduct</span></a>
   </li>  
 </ul>
@@ -185,7 +216,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Metagenomics</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson06-taxonomic-annotations/index.html">Taxonomic Annotations</a></li><li class="breadcrumb-item"><a href="../../docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html">Taxonomic Analysis with R</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -199,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson01-files-and-directories/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson01-files-and-directories/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Files and Directories</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -208,19 +239,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson01-files-and-directories/01-understanding-file-systems.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson01-files-and-directories/01-understanding-file-systems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Understanding your file system</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson01-files-and-directories/02-logging-onto-cloud.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson01-files-and-directories/02-logging-onto-cloud.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Logging onto the Cloud</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson01-files-and-directories/03-shell-introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson01-files-and-directories/03-shell-introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introducing the Shell</span></a>
   </div>
 </li>
@@ -228,7 +259,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson02-using-the-command-line/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson02-using-the-command-line/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using the Command Line</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -237,19 +268,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson02-using-the-command-line/01-navigating-file-directories.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson02-using-the-command-line/01-navigating-file-directories.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Navigating Files and Directories</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson02-using-the-command-line/02-working-with-file.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson02-using-the-command-line/02-working-with-file.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working with Files and Directories</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson02-using-the-command-line/03-redirection.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson02-using-the-command-line/03-redirection.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Redirection</span></a>
   </div>
 </li>
@@ -257,7 +288,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson03-qc-assembly/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson03-qc-assembly/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC &amp; Assembly</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -266,19 +297,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson03-qc-assembly/00-introduction-meta.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson03-qc-assembly/00-introduction-meta.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to Metagenomics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assessing Read Quality, Trimming and Filtering</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson03-qc-assembly/02-assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson03-qc-assembly/02-assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Metagenome Assembly</span></a>
   </div>
 </li>
@@ -286,7 +317,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson04-polishing/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson04-polishing/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Polishing</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -295,13 +326,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson04-polishing/01-polishing-assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson04-polishing/01-polishing-assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Polishing an assembly</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson04-polishing/02-QC-polished-assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson04-polishing/02-QC-polished-assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC polished assembly</span></a>
   </div>
 </li>
@@ -309,7 +340,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson05-binning-functional-annotation/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson05-binning-functional-annotation/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Binning &amp; Functional Annotation</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -318,19 +349,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson05-binning-functional-annotation/01-binning.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson05-binning-functional-annotation/01-binning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Metagenome Binning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson05-binning-functional-annotation/02-binning_quality.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson05-binning-functional-annotation/02-binning_quality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC of metagenome bins</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson05-binning-functional-annotation/03-Functional-annotation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson05-binning-functional-annotation/03-Functional-annotation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Functional annotation</span></a>
   </div>
 </li>
@@ -338,28 +369,28 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson06-taxonomic-annotations/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson06-taxonomic-annotations/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Taxonomic Annotations</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson06-taxonomic-annotations/01-taxonomic.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson06-taxonomic-annotations/01-taxonomic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Taxonomic Assignment</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Diversity Tackled With R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Taxonomic Analysis with R</span></a>
   </div>
 </li>
@@ -367,7 +398,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson07-automation-bash-scripts/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson07-automation-bash-scripts/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Automating Analyses with Bash Scripts</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -376,13 +407,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson07-automation-bash-scripts/01-scripting-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson07-automation-bash-scripts/01-scripting-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to Bash Scripting</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson07-automation-bash-scripts/02-base-automation-script.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson07-automation-bash-scripts/02-base-automation-script.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Base Automation Script</span></a>
   </div>
 </li>
@@ -398,20 +429,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
-  <li><a href="#course-format" id="toc-course-format" class="nav-link" data-scroll-target="#course-format">Course format</a></li>
-  <li><a href="#course-overview" id="toc-course-overview" class="nav-link" data-scroll-target="#course-overview">Course Overview</a></li>
+  <li><a href="#reminder" id="toc-reminder" class="nav-link active" data-scroll-target="#reminder">Reminder</a></li>
+  <li><a href="#summarise-metagenomes" id="toc-summarise-metagenomes" class="nav-link" data-scroll-target="#summarise-metagenomes">Summarise metagenomes</a></li>
+  <li><a href="#visualizing-our-data" id="toc-visualizing-our-data" class="nav-link" data-scroll-target="#visualizing-our-data">Visualizing our data</a></li>
+  <li><a href="#transformation-of-data" id="toc-transformation-of-data" class="nav-link" data-scroll-target="#transformation-of-data">Transformation of data</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson06-taxonomic-annotations/03-hands_on-diversity.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson06-taxonomic-annotations/index.html">Taxonomic Annotations</a></li><li class="breadcrumb-item"><a href="../../docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html">Taxonomic Analysis with R</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Metagenomics</h1>
-<p class="subtitle lead">Environmental Applications</p>
+<h1 class="title">Taxonomic Analysis with R</h1>
 </div>
 
 
@@ -428,101 +458,178 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This hands-on, online course teaches data analysis for metagenomics projects. It is aimed at those with little or no experience of using high performance computing (HPC) for data analysis. In the course we will cover:</p>
-<ul>
-<li>navigating file directories and using the command line</li>
-<li>logging into a remote cloud instance</li>
-<li>using common commands and running analysis programs in the command line</li>
-<li>what is metagenomics?</li>
-<li>following a metagenomics analysis workflow including:
-<ul>
-<li>performing quality control on reads</li>
-<li>assembly of reads into a metagenome</li>
-<li>improving your assembly with polishing</li>
-<li>binning into species/metagenome-assembled genomes (MAGs)</li>
-<li>taxonomic assignment and functional annotation using your binned reads</li>
-</ul></li>
-</ul>
-<p>The course is taught as a mixture of live coding, online lectures, self-study and drop-in sessions.</p>
-<section id="prerequisites" class="level2">
-<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Biological concepts and software setup
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This course assumes no prior experience with the tools covered in the workshop but learners are expected to have some familiarity with biological concepts, including the concept of genomes and microbiomes. Participants should bring their own laptops and plan to participate actively.</p>
-<p>To get started, follow the directions in the Setup tab to get access to the required software and data for this workshop. <strong>Windows users</strong> need to install Git Bash in their laptop. <strong>Mac users</strong> may need to configure the <strong>terminal</strong> program in their laptop to use the Bash shell.</p>
-</div>
-</div>
+<section id="reminder" class="level2">
+<h2 class="anchored" data-anchor-id="reminder">Reminder</h2>
+<p>In the last lesson, we created our phyloseq object, which contains the information of our samples: <code>ERR4998593</code> and <code>ERR4998600</code>. Let´s take a look again at the number of reads in our data.</p>
+<p>For the whole metagenome:</p>
+<pre><code>biom_metagenome
+sample_sums(biom_metagenome)</code></pre>
+<p>{: .language-r}</p>
+<pre><code>phyloseq-class experiment-level object
+otu_table()   OTU Table:         [ 7637 taxa and 2 samples ]
+tax_table()   Taxonomy Table:    [ 7637 taxa by 7 taxonomic ranks ] 
+
+ERR4998593 ERR4998600 
+    444454     311439  </code></pre>
+<p>{: .output}</p>
+<blockquote class="blockquote">
+<h2 id="exercise-1" class="anchored">Exercise 1</h2>
+<p>Repeat this for the bacterial metagenome. &gt; ## Solution &gt; Use <code>bac_biom_metagenome</code> instead of <code>biom_metagenome</code> &gt; ~~~ &gt; bac_biom_metagenome &gt; sample_sums(bac_biom_metagenome) &gt; ~~~ &gt; {: .language-r} &gt; &gt; ~~~ &gt; phyloseq-class experiment-level object &gt; otu_table() OTU Table: [ 7231 taxa and 2 samples ] &gt; tax_table() Taxonomy Table: [ 7231 taxa by 7 taxonomic ranks ] &gt; &gt; ERR4998593 ERR4998600 &gt; 442490 305135 &gt; ~~~ &gt; {: .output} &gt; {: .solution} {: .challenge}</p>
+</blockquote>
+<p>We saw how to find out how many phyla we have and how many OTU there are in each phyla, by combining commands we: - turned the tax_table into a data frame (a useful data structure in R) - grouped by the Phylum column - summarised by counting the number of rows for each phylum - viewed the result This can be achieved with the following command:</p>
+<pre><code>bac_biom_metagenome@tax_table %&gt;% 
+  data.frame() %&gt;% 
+  group_by(Phylum) %&gt;% 
+  summarise(n = length(Phylum)) %&gt;% 
+  View()</code></pre>
+<p>{: .language-r}</p>
 </section>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-About the data used in the course
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This course uses data from a 2022 paper published in BMC Environmental Microbiome titled <a href="https://environmentalmicrobiome.biomedcentral.com/articles/10.1186/s40793-022-00424-2">In-depth characterization of denitrifier communities across different soil ecosystems in the tundra</a>. In this course we will compare data from two of the sites studied.</p>
-<p>You can read more about the data used in the course <a href="data/index.html">here</a>.</p>
-</div>
-</div>
+<section id="summarise-metagenomes" class="level2">
+<h2 class="anchored" data-anchor-id="summarise-metagenomes">Summarise metagenomes</h2>
+<p><code>phyloseq</code> has a useful function that turns a phyloseq object into a dataframe. Since the dataframe is a standard data format in R, this makes it easier for R users to apply methods they are familiar with.</p>
+<p>Use <code>psmelt()</code> to make a dataframe for the bacterial metagenomes: ~~~ bac_meta_df &lt;- psmelt(bac_biom_metagenome) ~~~ {: .language-r}</p>
+<p>Clicking on <code>bac_meta_df</code> on the Environment window will open a spreadsheet-like view of it.</p>
+<p>Now we can more easily summarise our metagenomes by sample using standard syntax. The following filters out all the rows with zero abundance then counts the number of taxa in each phylum for each sample:</p>
+<pre><code>number_of_taxa &lt;- bac_meta_df %&gt;% 
+  filter(Abundance &gt; 0) %&gt;% 
+  group_by(Sample, Phylum) %&gt;% 
+  summarise(n = length(Abundance))</code></pre>
+<p>{: .language-r}</p>
+<p>Clicking on <code>number_of_taxa</code> on the Environment window will open a spreadsheet-like view of it</p>
+<p>One way to visualise the phyla is with a Venn diagram. The package <code>ggvenn</code> will draw one for us. It needs a data structure called a list which will contain an item for each sample of the phyla in that sample. We can see the phyla in the ERR4998593 sample with: ~~~ unique(number_of_taxa<span class="math inline">\(Phylum[number_of_taxa\)</span>Sample == “ERR4998593”]) ~~~ {: .language-r}</p>
+<pre><code>[1] "Acidobacteria"                 "Actinobacteria"                "Aquificae"                    
+[4] "Armatimonadetes"               "Atribacterota"                 "Bacteroidetes"                
+[7] "Balneolaeota"                  "Caldiserica"                   "Calditrichaeota"              
+[10] "Candidatus Absconditabacteria" "Candidatus Bipolaricaulota"    "Candidatus Cloacimonetes"     
+[13] "Candidatus Omnitrophica"       "Candidatus Saccharibacteria"   "Chlamydiae"                   
+[16] "Chlorobi"                      "Chloroflexi"                   "Chrysiogenetes"               
+[19] "Coprothermobacterota"          "Cyanobacteria"                 "Deferribacteres"              
+[22] "Deinococcus-Thermus"           "Dictyoglomi"                   "Elusimicrobia"                
+[25] "Fibrobacteres"                 "Firmicutes"                    "Fusobacteria"                 
+[28] "Gemmatimonadetes"              "Ignavibacteriae"               "Kiritimatiellaeota"           
+[31] "Nitrospirae"                   "Planctomycetes"                "Proteobacteria"               
+[34] "Spirochaetes"                  "Synergistetes"                 "Tenericutes"                  
+[37] "Thermodesulfobacteria"         "Thermotogae"                   "Verrucomicrobia"</code></pre>
+<p>{: .output}</p>
+<blockquote class="blockquote">
+<h2 id="exercise-2" class="anchored">Exercise 2</h2>
+<p>Repeat this for the ERR4998600 sample &gt; ## Solution &gt; Use ERR4998600 instead of ERR4998593 &gt; ~~~ &gt; unique(number_of_taxa<span class="math inline">\(Phylum[number_of_taxa\)</span>Sample == “ERR4998600”]) &gt; ~~~ &gt; {: .language-r} &gt; &gt; ~~~ &gt; “[1]”Acidobacteria” “Actinobacteria” “Aquificae”<br>
+&gt; [4] “Armatimonadetes” “Atribacterota” “Bacteroidetes”<br>
+&gt; [7] “Balneolaeota” “Caldiserica” “Calditrichaeota”<br>
+&gt; [10] “Candidatus Absconditabacteria” “Candidatus Bipolaricaulota” “Candidatus Cloacimonetes”<br>
+&gt; [13] “Candidatus Omnitrophica” “Candidatus Saccharibacteria” “Chlamydiae”<br>
+&gt; [16] “Chlorobi” “Chloroflexi” “Chrysiogenetes”<br>
+&gt; [19] “Coprothermobacterota” “Cyanobacteria” “Deferribacteres”<br>
+&gt; [22] “Deinococcus-Thermus” “Dictyoglomi” “Elusimicrobia”<br>
+&gt; [25] “Fibrobacteres” “Firmicutes” “Fusobacteria”<br>
+&gt; [28] “Gemmatimonadetes” “Ignavibacteriae” “Kiritimatiellaeota”<br>
+&gt; [31] “Nitrospirae” “Planctomycetes” “Proteobacteria”<br>
+&gt; [34] “Spirochaetes” “Synergistetes” “Tenericutes”<br>
+&gt; [37] “Thermodesulfobacteria” “Thermotogae” “Verrucomicrobia”<br>
+&gt; ~~~ &gt; {: .output} &gt; {: .solution} {: .challenge}</p>
+</blockquote>
+<p>To place the two sets of phlya in a list, we use ~~~ venn_data &lt;- list(ERR4998593 = unique(number_of_taxa<span class="math inline">\(Phylum[number_of_taxa\)</span>Sample == “ERR4998593”]), ERR4998600 = unique(number_of_taxa<span class="math inline">\(Phylum[number_of_taxa\)</span>Sample == “ERR4998600”])) ~~~ {: .language-r}</p>
+<p>And to draw the venn diagram ~~~ ggvenn(venn_data) ~~~ {: .language-r}</p>
+<p>The Venn diagram shows that all of the phyla are found in both samples. There are no phyla exclusive to either ERR4998593 or ERR4998600.</p>
+<p><a href="{{ page.root }}/fig/03_03_phyla_venn.png"> <img src="{{ page.root }}/fig/03_03_phyla_venn.png" alt="venn diagram for the phyla in the two sample."> </a></p>
+<p>Imagine that there were some phylas different between the two. Perhaps you would like to know which phyla are in ERR4998593 only? The following command would print that for us:</p>
+<pre><code>venn_data$ERR4998593[!venn_data$ERR4998593 %in% venn_data$ERR4998600]</code></pre>
+<p>{: .language-r}</p>
+<pre><code>NULL</code></pre>
+<p>{: .output}</p>
+<p>Of course, this time we get a <code>NULL</code> reponse since the statement doesn’t apply to any phyla.</p>
 </section>
-<section id="course-format" class="level2">
-<h2 class="anchored" data-anchor-id="course-format">Course format</h2>
-<p>This workshop is designed to be run on pre-imaged Amazon Web Services (AWS) instances. All the software and data used in the workshop are hosted on an Amazon Machine Image (AMI). We will give you details as to how to access these instances after registration.</p>
-<p>The course will take place over three weeks and will combine live coding and teaching with offline work. We will guide you through the analysis each session but some steps may need to completed offline due to the amount of time they take to complete. There will also be drop-in sessions to offer support and troubleshooting help, and a Slack workspace for questions.</p>
+<section id="visualizing-our-data" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-our-data">Visualizing our data</h2>
+<p>We summarised our metagenomes by the number of phyla in each sample in <code>number_of_taxa</code>. We can use a similar approach to examine the abundance of each of these taxa:</p>
+<pre><code>abundance_of_taxa &lt;- bac_meta_df %&gt;% 
+  filter(Abundance &gt; 0) %&gt;% 
+  group_by(Sample, Phylum) %&gt;% 
+  summarise(Abundance = sum(Abundance))</code></pre>
+<p>{: .language-r}</p>
+<p>It would be nice to see the abundance by phyla as a figure. We can use the <code>ggplot()</code> function to visualise the breakdown by Phylum in each of our two bacterial metagenomes:</p>
+<pre><code>abundance_of_taxa %&gt;% 
+  ggplot(aes(x = Sample, y = Abundance, fill = Phylum)) +
+  geom_col(position = "stack")</code></pre>
+<p>{: .language-r}</p>
+<p><a href="{{ page.root }}/fig/03_03_abs_phyl_plot.png"> <img src="{{ page.root }}/fig/03_03_abs_phyl_plot.png" alt="Plot of the absolute abundance of each Phylum in the two samples."> </a></p>
+<p>We can see that the most abundant phyla in both samples are Proteobacteria and Actinobacteria.</p>
 </section>
-<section id="course-overview" class="level2">
-<h2 class="anchored" data-anchor-id="course-overview">Course Overview</h2>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Overview</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="./docs/lesson01-files-and-directories/index.html">Files and Directories</a></td>
-<td>Learn about files and directories, log onto a cloud instance and get a basic introduction to the shell.</td>
-</tr>
-<tr class="even">
-<td><a href="./docs/lesson02-using-the-command-line/index.html">Using the Command Line</a></td>
-<td>Learn more about using the shell to navigate directories, manipulate and search files, and combine existing commands to do new things.</td>
-</tr>
-<tr class="odd">
-<td><a href="./docs/lesson03-qc-assembly/index.html">QC &amp; Assembly</a></td>
-<td>How to quality control and assemble a genome.</td>
-</tr>
-<tr class="even">
-<td><a href="./docs/lesson04-polishing/index.html">Polishing</a></td>
-<td>How to use short reads to polish your metagenome assembly</td>
-</tr>
-<tr class="odd">
-<td><a href="./docs/lesson05-binning-functional-annotation/index.html">Binning &amp; Functional Annotation</a></td>
-<td>How to separate an assembly into MAGs and add functional annotation to these MAGs.</td>
-</tr>
-<tr class="even">
-<td><a href="./docs/lesson06-taxonomic-annotations/index.html">Taxonomic Annotations</a></td>
-<td>How to add taxonomic annotations onto contigs in an assembly.</td>
-</tr>
-<tr class="odd">
-<td><a href="./docs/lesson07-automation-bash-scripts/index.html">Automating Analyses with Bash Scripts</a></td>
-<td>How to automate the analyses tasks in the previous lessons using Bash scripts.</td>
-</tr>
-</tbody>
-</table>
+<section id="transformation-of-data" class="level2">
+<h2 class="anchored" data-anchor-id="transformation-of-data">Transformation of data</h2>
+<p>Since our metagenomes have different sizes, it is imperative to convert the number of assigned reads into percentages (i.e.&nbsp;relative abundances) to compare them.</p>
+<p>We can achieve this with: ~~~ abundance_of_taxa &lt;- abundance_of_taxa %&gt;% group_by(Sample) %&gt;% mutate(relative = Abundance/sum(Abundance) * 100) ~~~ {: .language-r}</p>
+<p>Then plot the result:</p>
+<pre><code>abundance_of_taxa %&gt;% 
+  ggplot(aes(x = Sample, y = relative, fill = Phylum)) +
+  geom_col(position = "stack")</code></pre>
+<p>{: .language-r}</p>
+<p><a href="{{ page.root }}/fig/03_03_rel_phyl_plot.png"> <img src="{{ page.root }}/fig/03_03_rel_abun.png" alt="Plot of the relative abundance of each Phylum in the two samples."> </a></p>
+<p>This bar chart still isn’t ideal. It has too many colours to accurately identify each phyla.</p>
+<p>Let’s try plotting the phyla as points on a scatter graph, with the two samples as axes.</p>
+<p>First we select all the columns in <code>abundance_of_taxa</code> except <code>Abundance</code>, leaving <code>Sample</code>, <code>Phylum</code> and <code>relative</code>. Then we pivot the data frame so that each <code>Sample</code> has its own column, containing the values that used to be in the <code>relative</code> column. One row represents one phylum.</p>
+<pre><code>abundance_of_taxa_wide &lt;- abundance_of_taxa %&gt;%
+  select(-Abundance) %&gt;%
+  pivot_wider(names_from = Sample, values_from = relative)</code></pre>
+<p>{: .language-r}</p>
+<p>Then plot a scatter graph with:</p>
+<pre><code>abundance_of_taxa_wide %&gt;% 
+  ggplot(aes(x = ERR4998593, y = ERR4998600)) +
+  geom_point() +
+  ggtitle("Relative abundances of phyla")</code></pre>
+<p>{: .language-r}</p>
+<p><a href="{{ page.root }}/fig/03_03_scatter_1.png"> <img src="{{ page.root }}/fig/03_03_scatter_1.png" alt="scatter diagram for the phyla in the two samples."> </a></p>
+<p>It looks like our data is all clustered at the low end of the scale, with only a couple of points further along. Let’s try using a log scale to see the spread a bit better. We’d better add labels to our axes too, to remind us that a log scale was used</p>
+<pre><code>abundance_of_taxa_wide %&gt;% 
+  ggplot(aes(x = ERR4998593, y = ERR4998600)) +
+  geom_point() +
+  scale_x_log10() +
+  xlab("Log10(ERR4998593)") +
+  scale_y_log10() +
+  ylab("Log10(ERR4998600)") +
+  ggtitle("Relative abundances of phyla")</code></pre>
+<p>{: .language-r}</p>
+<p><a href="{{ page.root }}/fig/03_03_scatter_logged.png"> <img src="{{ page.root }}/fig/03_03_scatter_logged.png" alt="scatter diagram for the phyla in the two samples with log scale."> </a></p>
+<p>That’s better! We should also add a reference line too so we can see where the points would be if they were found in equal proportions in both samples. Then we can see which phyla have a higher relative abundance in each sample. We can do this with geom_abline() which draws a line with formula y=x</p>
+<pre><code>abundance_of_taxa_wide %&gt;% 
+  ggplot(aes(x = ERR4998593, y = ERR4998600)) +
+  geom_point() +
+  scale_x_log10() +
+  xlab("Log10(ERR4998593)") +
+  scale_y_log10() +
+  ylab("Log10(ERR4998600)") +
+  geom_abline() +
+  ggtitle("Relative abundances of phyla")</code></pre>
+<p>{: .language-r}</p>
+<p><a href="{{ page.root }}/fig/03_03_scatter_logged_with_line.png"> <img src="{{ page.root }}/fig/03_03_scatter_logged_with_line.png" alt="scatter diagram for the phyla in the two samples with log scale and y=x reference line."> </a></p>
+<p>Most of the points fall closer to the <code>ERR4998600</code> axis, telling us most of the phyla recorded had higher relative abundance in this sample than in <code>ERR4998593</code>. <code>ERR4998593</code> is probably dominated by one or two extremely abundant phyla - we actually already know this from looking at the relative abundances as a bar chart.</p>
+<p>Let’s finish by marking the phyla that are more abundant in <code>ERR4998593</code> in a different colour and labelling them. We start by calculating the difference between the relative abundances for each sample - this will tell us if each phylum is more abundant in <code>ERR4998600</code> (a positive number) or in <code>ERR4998593</code> (a negative number). Then we make a list of all the phyla which have a negative difference.</p>
+<pre><code>abundance_of_taxa_wide &lt;- abundance_of_taxa_wide %&gt;%
+  mutate(diff = ERR4998600 - ERR4998593) %&gt;%
+  arrange(diff)
+ERR4998593_phyla &lt;- filter(abundance_of_taxa_wide, diff &lt; 0)$Phylum</code></pre>
+<p>{: .language-r}</p>
+<p>Now we have a list of phyla we can plot new points on the graph that are only present in the list we just made, this time in a different colour. We can also add a label with geom_text() to tell us what phyla these points represent.</p>
+<pre><code>abundance_of_taxa_wide %&gt;% 
+  ggplot(aes(x = ERR4998593, y = ERR4998600)) +
+  geom_point() +
+  geom_point(
+    data = filter(abundance_of_taxa_wide, Phylum %in% ERR4998593_phyla),
+    aes(), 
+    col = "red") +
+  geom_text(
+    data = filter(abundance_of_taxa_wide, Phylum %in% ERR4998593_phyla),
+    aes(label = Phylum), 
+    nudge_y = -0.125,
+    col = "red") +
+  scale_x_log10() +
+  xlab("Log10(ERR4998593)") +
+  scale_y_log10() +
+  ylab("Log10(ERR4998600)") +
+  geom_abline() +
+  ggtitle("Relative abundances of phyla")</code></pre>
+<p><a href="{{ page.root }}/fig/03_03_scatter_annotated.png"> <img src="{{ page.root }}/fig/03_03_scatter_annotated.png" alt="scatter diagram for the phyla in the two samples with points closer to ERR4998593 axis highlighted."> </a> {: .language-r}</p>
+<p>The two phyla which are more abundant in <code>ERR4998593</code> than in <code>ERR4998600</code> are Proteobacteria and Chlamydiae. We’ve seen Proteobacteria before, in our bar chart, where it was the most abundant phylum in both samples. We could probably have guessed from that graph that Proteobacteria had a higher relative abundance in one sample than the other, because the bars were very large. But we probably wouldn’t have been able to tell which sample Chlamydiae was more abundant in - its relative proportion in both is too small to see in the bar chart.</p>
 
 
 </section>
@@ -937,6 +1044,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html" class="pagination-link" aria-label="Diversity Tackled With R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Diversity Tackled With R</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/lesson07-automation-bash-scripts/index.html" class="pagination-link" aria-label="Automating Analyses with Bash Scripts">
+        <span class="nav-page-text">Automating Analyses with Bash Scripts</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -946,27 +1065,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="./about.qmd">
+    <a class="nav-link" href="../../about.qmd">
 <p>About</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./docs/faq/index.qmd">
+    <a class="nav-link" href="../../docs/faq/index.qmd">
 <p>FAQ</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./license.qmd">
+    <a class="nav-link" href="../../license.qmd">
 <p>License</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./trademark.qmd">
+    <a class="nav-link" href="../../trademark.qmd">
 <p>Trademark</p>
 </a>
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson06-taxonomic-annotations/03-hands_on-diversity.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

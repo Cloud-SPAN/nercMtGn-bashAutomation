@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automating Metagenomics Analyses with Bash Scripts - Metagenomics</title>
+<title>Automating Metagenomics Analyses with Bash Scripts - Introduction to Metagenomics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,21 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" rel="next">
+<link href="../../docs/lesson03-qc-assembly/index.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -77,8 +79,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/cloud-span-icon.png" alt="Cloud-SPAN logo." class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/cloud-span-icon.png" alt="Cloud-SPAN logo." class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -88,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -97,41 +99,41 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-lessons">    
         <li>
-    <a class="dropdown-item" href="./index.html">
+    <a class="dropdown-item" href="../../index.html">
  <span class="dropdown-text">Course Overview</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson01-files-and-directories/index.html">
+    <a class="dropdown-item" href="../../docs/lesson01-files-and-directories/index.html">
  <span class="dropdown-text">Files and Directories</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson02-using-the-command-line/index.html">
+    <a class="dropdown-item" href="../../docs/lesson02-using-the-command-line/index.html">
  <span class="dropdown-text">Using the Command Line</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson03-qc-assembly/index.html">
+    <a class="dropdown-item" href="../../docs/lesson03-qc-assembly/index.html">
  <span class="dropdown-text">QC &amp; Assembly</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson04-polishing/index.html">
+    <a class="dropdown-item" href="../../docs/lesson04-polishing/index.html">
  <span class="dropdown-text">Polishing</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson05-binning-functional-annotation/index.html">
+    <a class="dropdown-item" href="../../docs/lesson05-binning-functional-annotation/index.html">
  <span class="dropdown-text">Binning and Functional Annotation</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson06-taxonomic-annotations/index.html">
+    <a class="dropdown-item" href="../../docs/lesson06-taxonomic-annotations/index.html">
  <span class="dropdown-text">Taxonomic Annotations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson07-automation-bash-scripts/index.html">
+    <a class="dropdown-item" href="../../docs/lesson07-automation-bash-scripts/index.html">
  <span class="dropdown-text">Automating Analyses with Bash Scripts</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./docs/miscellanea/setup.html"> 
+    <a class="nav-link" href="../../docs/miscellanea/setup.html"> 
 <span class="menu-text">Setup</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -140,33 +142,33 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-extras">    
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/reference.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/reference.qmd">
  <span class="dropdown-text">Reference</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/about.html">
+    <a class="dropdown-item" href="../../docs/miscellanea/about.html">
  <span class="dropdown-text">About</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/data.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/data.qmd">
  <span class="dropdown-text">Data</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/faq.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/faq.qmd">
  <span class="dropdown-text">Frequently Asked Questions</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/instructornotes.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/instructornotes.qmd">
  <span class="dropdown-text">Instructor Notes</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./docs/miscellanea/license.html"> 
+    <a class="nav-link" href="../../docs/miscellanea/license.html"> 
 <span class="menu-text">License</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./docs/miscellanea/codeofconduct.html"> 
+    <a class="nav-link" href="../../docs/miscellanea/codeofconduct.html"> 
 <span class="menu-text">Code of Conduct</span></a>
   </li>  
 </ul>
@@ -185,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Metagenomics</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson03-qc-assembly/index.html">QC &amp; Assembly</a></li><li class="breadcrumb-item"><a href="../../docs/lesson03-qc-assembly/00-introduction-meta.html">Introduction to Metagenomics</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -199,7 +201,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson01-files-and-directories/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson01-files-and-directories/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Files and Directories</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -208,19 +210,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson01-files-and-directories/01-understanding-file-systems.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson01-files-and-directories/01-understanding-file-systems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Understanding your file system</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson01-files-and-directories/02-logging-onto-cloud.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson01-files-and-directories/02-logging-onto-cloud.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Logging onto the Cloud</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson01-files-and-directories/03-shell-introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson01-files-and-directories/03-shell-introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introducing the Shell</span></a>
   </div>
 </li>
@@ -228,7 +230,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson02-using-the-command-line/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson02-using-the-command-line/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using the Command Line</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -237,19 +239,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson02-using-the-command-line/01-navigating-file-directories.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson02-using-the-command-line/01-navigating-file-directories.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Navigating Files and Directories</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson02-using-the-command-line/02-working-with-file.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson02-using-the-command-line/02-working-with-file.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working with Files and Directories</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson02-using-the-command-line/03-redirection.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson02-using-the-command-line/03-redirection.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Redirection</span></a>
   </div>
 </li>
@@ -257,28 +259,28 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson03-qc-assembly/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson03-qc-assembly/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC &amp; Assembly</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson03-qc-assembly/00-introduction-meta.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson03-qc-assembly/00-introduction-meta.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Introduction to Metagenomics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assessing Read Quality, Trimming and Filtering</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson03-qc-assembly/02-assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson03-qc-assembly/02-assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Metagenome Assembly</span></a>
   </div>
 </li>
@@ -286,7 +288,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson04-polishing/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson04-polishing/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Polishing</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -295,13 +297,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson04-polishing/01-polishing-assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson04-polishing/01-polishing-assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Polishing an assembly</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson04-polishing/02-QC-polished-assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson04-polishing/02-QC-polished-assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC polished assembly</span></a>
   </div>
 </li>
@@ -309,7 +311,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson05-binning-functional-annotation/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson05-binning-functional-annotation/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Binning &amp; Functional Annotation</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -318,19 +320,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson05-binning-functional-annotation/01-binning.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson05-binning-functional-annotation/01-binning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Metagenome Binning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson05-binning-functional-annotation/02-binning_quality.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson05-binning-functional-annotation/02-binning_quality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC of metagenome bins</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson05-binning-functional-annotation/03-Functional-annotation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson05-binning-functional-annotation/03-Functional-annotation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Functional annotation</span></a>
   </div>
 </li>
@@ -338,7 +340,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson06-taxonomic-annotations/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson06-taxonomic-annotations/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Taxonomic Annotations</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -347,19 +349,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson06-taxonomic-annotations/01-taxonomic.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson06-taxonomic-annotations/01-taxonomic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Taxonomic Assignment</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Diversity Tackled With R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Taxonomic Analysis with R</span></a>
   </div>
 </li>
@@ -367,7 +369,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson07-automation-bash-scripts/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson07-automation-bash-scripts/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Automating Analyses with Bash Scripts</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -376,13 +378,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson07-automation-bash-scripts/01-scripting-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson07-automation-bash-scripts/01-scripting-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to Bash Scripting</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson07-automation-bash-scripts/02-base-automation-script.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson07-automation-bash-scripts/02-base-automation-script.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Base Automation Script</span></a>
   </div>
 </li>
@@ -398,20 +400,26 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
-  <li><a href="#course-format" id="toc-course-format" class="nav-link" data-scroll-target="#course-format">Course format</a></li>
-  <li><a href="#course-overview" id="toc-course-overview" class="nav-link" data-scroll-target="#course-overview">Course Overview</a></li>
+  <li><a href="#what-is-the-difference-between-genomics-and-metagenomics" id="toc-what-is-the-difference-between-genomics-and-metagenomics" class="nav-link active" data-scroll-target="#what-is-the-difference-between-genomics-and-metagenomics">What is the difference between Genomics and Metagenomics?</a></li>
+  <li><a href="#metagenomics" id="toc-metagenomics" class="nav-link" data-scroll-target="#metagenomics">Metagenomics</a></li>
+  <li><a href="#community-sequencing-approaches" id="toc-community-sequencing-approaches" class="nav-link" data-scroll-target="#community-sequencing-approaches">Community sequencing approaches</a>
+  <ul class="collapse">
+  <li><a href="#whole-metagenome-sequencing-wms" id="toc-whole-metagenome-sequencing-wms" class="nav-link" data-scroll-target="#whole-metagenome-sequencing-wms">Whole metagenome sequencing (WMS)</a></li>
+  <li><a href="#amplicon-sequencing" id="toc-amplicon-sequencing" class="nav-link" data-scroll-target="#amplicon-sequencing">Amplicon sequencing</a></li>
+  </ul></li>
+  <li><a href="#nanopore-long-read-vs-illumina-short-read-data" id="toc-nanopore-long-read-vs-illumina-short-read-data" class="nav-link" data-scroll-target="#nanopore-long-read-vs-illumina-short-read-data">Nanopore (long-read) vs Illumina (short-read) data</a></li>
+  <li><a href="#our-data" id="toc-our-data" class="nav-link" data-scroll-target="#our-data">Our data</a></li>
+  <li><a href="#bioinformatic-workflows" id="toc-bioinformatic-workflows" class="nav-link" data-scroll-target="#bioinformatic-workflows">Bioinformatic workflows</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson03-qc-assembly/00-introduction-meta.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson03-qc-assembly/index.html">QC &amp; Assembly</a></li><li class="breadcrumb-item"><a href="../../docs/lesson03-qc-assembly/00-introduction-meta.html">Introduction to Metagenomics</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Metagenomics</h1>
-<p class="subtitle lead">Environmental Applications</p>
+<h1 class="title">Introduction to Metagenomics</h1>
 </div>
 
 
@@ -428,101 +436,141 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This hands-on, online course teaches data analysis for metagenomics projects. It is aimed at those with little or no experience of using high performance computing (HPC) for data analysis. In the course we will cover:</p>
-<ul>
-<li>navigating file directories and using the command line</li>
-<li>logging into a remote cloud instance</li>
-<li>using common commands and running analysis programs in the command line</li>
-<li>what is metagenomics?</li>
-<li>following a metagenomics analysis workflow including:
-<ul>
-<li>performing quality control on reads</li>
-<li>assembly of reads into a metagenome</li>
-<li>improving your assembly with polishing</li>
-<li>binning into species/metagenome-assembled genomes (MAGs)</li>
-<li>taxonomic assignment and functional annotation using your binned reads</li>
-</ul></li>
-</ul>
-<p>The course is taught as a mixture of live coding, online lectures, self-study and drop-in sessions.</p>
-<section id="prerequisites" class="level2">
-<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Biological concepts and software setup
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This course assumes no prior experience with the tools covered in the workshop but learners are expected to have some familiarity with biological concepts, including the concept of genomes and microbiomes. Participants should bring their own laptops and plan to participate actively.</p>
-<p>To get started, follow the directions in the Setup tab to get access to the required software and data for this workshop. <strong>Windows users</strong> need to install Git Bash in their laptop. <strong>Mac users</strong> may need to configure the <strong>terminal</strong> program in their laptop to use the Bash shell.</p>
-</div>
-</div>
+<section id="what-is-the-difference-between-genomics-and-metagenomics" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-the-difference-between-genomics-and-metagenomics">What is the difference between Genomics and Metagenomics?</h2>
+<p>In <strong>genomics</strong>, we sequence and analyse the genome of a single species. We often have a known reference genome to which we can align all our reads.</p>
+<p>In <strong>metagenomics</strong> we sequence samples composed of many genomes. These might be environmental samples from soil or anaerobic digestors for example, or samples from the skin or digestive tracts of animals. Such samples typically include species that are difficult to culture and thus lack reference genomes. The challenge in metagenomics is to assemble this mix of diverse genomes into its constituent genomes.</p>
 </section>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-About the data used in the course
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This course uses data from a 2022 paper published in BMC Environmental Microbiome titled <a href="https://environmentalmicrobiome.biomedcentral.com/articles/10.1186/s40793-022-00424-2">In-depth characterization of denitrifier communities across different soil ecosystems in the tundra</a>. In this course we will compare data from two of the sites studied.</p>
-<p>You can read more about the data used in the course <a href="data/index.html">here</a>.</p>
-</div>
-</div>
+<section id="metagenomics" class="level2">
+<h2 class="anchored" data-anchor-id="metagenomics">Metagenomics</h2>
+<p>A metagenome is a collection of genomic sequences from various (micro) organisms coexisting in a given space. They are snapshots that tell us about the taxonomic, metabolic or functional composition of the communities that we study.</p>
+<p>Analysing multiple genomes rather than individual genomes introduces additional complexity: - Taxonomic assignment: How can we separate the sequences to the different putative organisms or taxonomic units? - Community Composition: How can we quantify the relative abundances of the taxonomic units present?</p>
+<p>A typical metagenomic workflow is designed to answer two questions: 1. What species are present in the sample and what are their relative abundances? 2. What is the functional capacity of the organisms or the community?</p>
 </section>
-<section id="course-format" class="level2">
-<h2 class="anchored" data-anchor-id="course-format">Course format</h2>
-<p>This workshop is designed to be run on pre-imaged Amazon Web Services (AWS) instances. All the software and data used in the workshop are hosted on an Amazon Machine Image (AMI). We will give you details as to how to access these instances after registration.</p>
-<p>The course will take place over three weeks and will combine live coding and teaching with offline work. We will guide you through the analysis each session but some steps may need to completed offline due to the amount of time they take to complete. There will also be drop-in sessions to offer support and troubleshooting help, and a Slack workspace for questions.</p>
+<section id="community-sequencing-approaches" class="level2">
+<h2 class="anchored" data-anchor-id="community-sequencing-approaches">Community sequencing approaches</h2>
+<p>There are two technologies used in mixed community sequencing which have different use cases, advantages and disadvantages: <strong>Whole genome metagenomics</strong> and <strong>Amplicon/(16S) sequencing</strong>.</p>
+<section id="whole-metagenome-sequencing-wms" class="level3">
+<h3 class="anchored" data-anchor-id="whole-metagenome-sequencing-wms">Whole metagenome sequencing (WMS)</h3>
+<p>Random parts of <strong>all of the genomes</strong> present in a sample are sequenced in WMS. We aim to find what organism, or “taxonomic unit”, they come from, what part of their genome they come from, and what functions they encode. This can be done by cross-referencing the sequences obtained with databases of information.</p>
+<p>If the metagenome is complex and deeply sequenced enough, we may even be able obtain full individual genomes from WMS and a strong understanding of the functional capacity of the microbiome.</p>
+<p>For abundant organisms in a metagenome sample, there are likely to be enough data to generate reasonable genome coverage. However, this is not the case for low abundance organisms. Often deeper sequencing/ more total sequencing data is required to assemble the genomes of these organisms. If your research question can be addressed by considering the most abundant organisms, you need do less sequencing than if your question requires an understanding of the rarest organisms present.</p>
+<p>The cost of both preparing the samples and the computational effort required to analyse them can become prohibitively expensive quickly. Before starting you need to think carefully about the question your dataset is trying to answer and how many samples you will need to sequence to get one. This is especially the case when you are trying to include biological or technical replication in your experimental design.</p>
 </section>
-<section id="course-overview" class="level2">
-<h2 class="anchored" data-anchor-id="course-overview">Course Overview</h2>
+<section id="amplicon-sequencing" class="level3">
+<h3 class="anchored" data-anchor-id="amplicon-sequencing">Amplicon sequencing</h3>
+<p>An <strong>amplicon</strong> is a small piece of DNA or RNA that will be amplified through PCR (Polymerase Chain Reaction). Amplicon sequencing is cheaper than WMS because only a small part of the genome is sequenced. This makes it affordable to include additional replicates.</p>
+<p>The region being amplified needs to be present in all the individuals in the community being characterised, and be highly conserved. 16 rRNA is often used for amplicon sequencing in bacteria for this reason (for eukaryotes 18S rRNA is used instead).</p>
+<p>For organisms that are well characterised, establishing identity can give you information about functional capacity of the community. For organisms which are not well characterised - and these are common in such samples - we will know little other than relative abundances in the community.</p>
+<p>Despite this, there are workflows such as <a href="https://qiime2.org/">QIIME2</a>, which are free and community led, which use database annotations of the reference versions of the organisms identified from the amplicon, to suggest what metabolic functions maybe present. The amplicon sequence is also limited because species may have genomic differences, but may be indistinguishable from the amplicon sequence alone. This means that amplicon sequencing can rarely resolve to less than a genus level.</p>
 <table class="table">
 <thead>
 <tr class="header">
-<th>Lesson</th>
-<th>Overview</th>
+<th>Attribute</th>
+<th>Amplicon</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="./docs/lesson01-files-and-directories/index.html">Files and Directories</a></td>
-<td>Learn about files and directories, log onto a cloud instance and get a basic introduction to the shell.</td>
+<td>Cost</td>
+<td>Cheap</td>
 </tr>
 <tr class="even">
-<td><a href="./docs/lesson02-using-the-command-line/index.html">Using the Command Line</a></td>
-<td>Learn more about using the shell to navigate directories, manipulate and search files, and combine existing commands to do new things.</td>
+<td>Coverage depth</td>
+<td>High</td>
 </tr>
 <tr class="odd">
-<td><a href="./docs/lesson03-qc-assembly/index.html">QC &amp; Assembly</a></td>
-<td>How to quality control and assemble a genome.</td>
+<td>Taxonomy detection</td>
+<td>Specific to amplicons used</td>
 </tr>
 <tr class="even">
-<td><a href="./docs/lesson04-polishing/index.html">Polishing</a></td>
-<td>How to use short reads to polish your metagenome assembly</td>
+<td>Genome coverage</td>
+<td>Only region amplified</td>
 </tr>
 <tr class="odd">
-<td><a href="./docs/lesson05-binning-functional-annotation/index.html">Binning &amp; Functional Annotation</a></td>
-<td>How to separate an assembly into MAGs and add functional annotation to these MAGs.</td>
+<td>Taxonomic resolution</td>
+<td>Lower</td>
 </tr>
 <tr class="even">
-<td><a href="./docs/lesson06-taxonomic-annotations/index.html">Taxonomic Annotations</a></td>
-<td>How to add taxonomic annotations onto contigs in an assembly.</td>
-</tr>
-<tr class="odd">
-<td><a href="./docs/lesson07-automation-bash-scripts/index.html">Automating Analyses with Bash Scripts</a></td>
-<td>How to automate the analyses tasks in the previous lessons using Bash scripts.</td>
+<td>Turnaround time</td>
+<td>Fast</td>
 </tr>
 </tbody>
 </table>
+</section>
+</section>
+<section id="nanopore-long-read-vs-illumina-short-read-data" class="level2">
+<h2 class="anchored" data-anchor-id="nanopore-long-read-vs-illumina-short-read-data">Nanopore (long-read) vs Illumina (short-read) data</h2>
+<p>In our <a href="https://cloud-span.github.io/experimental_design01-principles/01-platform/index.html">Statistically Useful Experimental Design</a> course we cover how to choose your sequencing platform based on your research question. However, it’s a bit different when doing a whole metagenome assembly experiment.</p>
+<p>For single genome analyses you can choose between assembling your genome one of two ways: using a reference as a template or <em>de novo</em> (without a reference). Which route you choose depends on whether there is a reasonable reference available for the genome you’re assembling.</p>
+<p>When looking at whole metagenome assembly, there will not be a reference available for the metagenome as a whole. You are also unlikely to know what species will be present. All of your assembly stages will therefore be <em>de novo</em>. This makes using long reads preferable as it’s easier to piece them together.</p>
+<p>We will talk about this more later in this lesson as part of the <a href="https://cloud-span.github.io/nerc-metagenomics03-qc-assembly/03-assembly/index.html">Genome Assembly</a> section. There are pros and cons to each using both long and short reads, and so using them in combination is usually the best method. These pros and cons are irrespective of the application.</p>
+<p>However, for metagenome analysis, if you were to use only short read sequencing for the assembly you would end up with a much more fragmented assembly to work with.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Short reads</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Technologies</td>
+<td>Illumina</td>
+</tr>
+<tr class="even">
+<td>Number of reads generated</td>
+<td>800 million paired end<strong>*</strong></td>
+</tr>
+<tr class="odd">
+<td>Base accuracy</td>
+<td>Very high</td>
+</tr>
+<tr class="even">
+<td>Ease of assembly</td>
+<td>Very difficult</td>
+</tr>
+<tr class="odd">
+<td>Format output files</td>
+<td>Fastq</td>
+</tr>
+<tr class="even">
+<td>Read length</td>
+<td>150-300bp</td>
+</tr>
+</tbody>
+</table>
+<p><strong>* As of July 2022, the NextSeq 550 high-output system runs were capable of generating upto <a href="https://emea.illumina.com/systems/sequencing-platforms/nextseq/specifications.html">800 million paired-end reads</a> in one run</strong></p>
+<p><strong>** There are different Nanopore instruments. The smaller instruments, like the minION, will generate far fewer reads. Larger instruments like the promethION will result in ~10-20k reads, but this will vary a lot between samples and their quality. They will never result in millions of reads like the Illumina platforms.</strong></p>
+<p><strong>*** The read length will vary based on the DNA extraction method. If the DNA is very fragmented it will not result in very long reads. In many metagenomes bead beating is required to lyse cells, and so read length will still be longer than Illumina but shorter than non-metagenomic samples sequenced.</strong></p>
+</section>
+<section id="our-data" class="level2">
+<h2 class="anchored" data-anchor-id="our-data">Our data</h2>
+<p>The data we will be using for the rest of the course (and that we’ve been using already!) comes from a 2022 paper titled <a href="https://environmentalmicrobiome.biomedcentral.com/articles/10.1186/s40793-022-00424-2">In-depth characterization of denitrifier communities across different soil ecosystems in the tundra</a>.</p>
+<p>The paper looks at microbial communities across 43 mountain tundra sites in Northern Finland. The researchers took soil samples from each site and followed a metagenomic analysis workflow to identify the species present in each one. They also measured environmental information such as elevation, soil moisture and N<sub>2</sub>O fluxes.</p>
+<p>We will be focusing on data from a single heathland site which has two sets of sequencing data available: one long-read (nanopore) and one short-read (illumina). We’ve already taken a look at these data as part of the previous two lessons - they are saved on our cloud instance under <code>nano_fastq</code> and <code>illumina_fastq</code> respectively.</p>
+<p>Towards the end of the course we’ll compare some of the data from our site with another site to see how they differ in terms of species composition and diversity.</p>
+</section>
+<section id="bioinformatic-workflows" class="level2">
+<h2 class="anchored" data-anchor-id="bioinformatic-workflows">Bioinformatic workflows</h2>
+<p><img align="right" width="325" height="506" src="{{ page.root }}/fig/metagenomics_flowchart_short.png" alt="Flow diagram that shows the steps: Sequence reads, Quality control, Assembly, Binning and Taxonomy"></p>
+<p>When working with high-throughput sequencing data, the raw reads you get off of the sequencer need to pass through a number of different tools in order to generate your final desired output.</p>
+<p>The use of this set of tools in a specified order is commonly referred to as a <em>workflow</em> or a <em>pipeline</em>.</p>
+<p>Here is an example of the workflow we will be using for our analysis with a brief description of each step.</p>
+<ol type="1">
+<li>Sequence reads - obtaining raw reads from a sample via sequencing</li>
+<li>Quality control - assessing quality of the reads and trimming and filtering if necessary.</li>
+<li>Metagenome assembly - piecing together genomes from reads into multiple long “contigs” (overlapping DNA segments)</li>
+<li>Binning - separating out genomes into ‘bins’ containing related contigs</li>
+<li>Taxonomic assignment - assigning taxonomy and functional analysis to sequences/contigs</li>
+</ol>
+<p>Workflows in bioinformatics often adopt a plug-and-play approach so the output of one tool can be easily used as input to another tool. The use of standard data formats in bioinformatics (such as FASTA or FASTQ, which we will be using here) makes this possible. The tools that are used to analyze data at different stages of the workflow are therefore built under the assumption that the data will be provided in a specific format.</p>
+<p>You can find a <a href="https://cloud-span.github.io/nerc-metagenomics03-qc-assembly/workflow/index.html">more detailed version of the workflow</a> we will be following by going to <code>Extras</code> and selecting <code>Workflow Reference</code>. This diagram contains all of the steps followed over the course alongside program names.</p>
+<p><br clear="right"></p>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
+<p>Hopefully you now feel ready to start following our workflow to analyse our data. We’ll be guiding you through the steps and giving more context for each one as we go along. Let’s go!</p>
 
 
 </section>
@@ -937,6 +985,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/lesson03-qc-assembly/index.html" class="pagination-link" aria-label="QC &amp; Assembly">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">QC &amp; Assembly</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" class="pagination-link" aria-label="Assessing Read Quality, Trimming and Filtering">
+        <span class="nav-page-text">Assessing Read Quality, Trimming and Filtering</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -946,27 +1006,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="./about.qmd">
+    <a class="nav-link" href="../../about.qmd">
 <p>About</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./docs/faq/index.qmd">
+    <a class="nav-link" href="../../docs/faq/index.qmd">
 <p>FAQ</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./license.qmd">
+    <a class="nav-link" href="../../license.qmd">
 <p>License</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./trademark.qmd">
+    <a class="nav-link" href="../../trademark.qmd">
 <p>Trademark</p>
 </a>
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson03-qc-assembly/00-introduction-meta.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

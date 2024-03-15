@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automating Metagenomics Analyses with Bash Scripts - Metagenomics</title>
+<title>Automating Metagenomics Analyses with Bash Scripts - Redirection</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,21 +23,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/lesson03-qc-assembly/index.html" rel="next">
+<link href="../../docs/lesson02-using-the-command-line/02-working-with-file.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -77,8 +79,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./images/cloud-span-icon.png" alt="Cloud-SPAN logo." class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/cloud-span-icon.png" alt="Cloud-SPAN logo." class="navbar-logo">
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -88,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -97,41 +99,41 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-lessons">    
         <li>
-    <a class="dropdown-item" href="./index.html">
+    <a class="dropdown-item" href="../../index.html">
  <span class="dropdown-text">Course Overview</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson01-files-and-directories/index.html">
+    <a class="dropdown-item" href="../../docs/lesson01-files-and-directories/index.html">
  <span class="dropdown-text">Files and Directories</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson02-using-the-command-line/index.html">
+    <a class="dropdown-item" href="../../docs/lesson02-using-the-command-line/index.html">
  <span class="dropdown-text">Using the Command Line</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson03-qc-assembly/index.html">
+    <a class="dropdown-item" href="../../docs/lesson03-qc-assembly/index.html">
  <span class="dropdown-text">QC &amp; Assembly</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson04-polishing/index.html">
+    <a class="dropdown-item" href="../../docs/lesson04-polishing/index.html">
  <span class="dropdown-text">Polishing</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson05-binning-functional-annotation/index.html">
+    <a class="dropdown-item" href="../../docs/lesson05-binning-functional-annotation/index.html">
  <span class="dropdown-text">Binning and Functional Annotation</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson06-taxonomic-annotations/index.html">
+    <a class="dropdown-item" href="../../docs/lesson06-taxonomic-annotations/index.html">
  <span class="dropdown-text">Taxonomic Annotations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/lesson07-automation-bash-scripts/index.html">
+    <a class="dropdown-item" href="../../docs/lesson07-automation-bash-scripts/index.html">
  <span class="dropdown-text">Automating Analyses with Bash Scripts</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./docs/miscellanea/setup.html"> 
+    <a class="nav-link" href="../../docs/miscellanea/setup.html"> 
 <span class="menu-text">Setup</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -140,33 +142,33 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-extras">    
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/reference.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/reference.qmd">
  <span class="dropdown-text">Reference</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/about.html">
+    <a class="dropdown-item" href="../../docs/miscellanea/about.html">
  <span class="dropdown-text">About</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/data.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/data.qmd">
  <span class="dropdown-text">Data</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/faq.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/faq.qmd">
  <span class="dropdown-text">Frequently Asked Questions</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./docs/miscellanea/instructornotes.qmd">
+    <a class="dropdown-item" href="../../docs/miscellanea/instructornotes.qmd">
  <span class="dropdown-text">Instructor Notes</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./docs/miscellanea/license.html"> 
+    <a class="nav-link" href="../../docs/miscellanea/license.html"> 
 <span class="menu-text">License</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./docs/miscellanea/codeofconduct.html"> 
+    <a class="nav-link" href="../../docs/miscellanea/codeofconduct.html"> 
 <span class="menu-text">Code of Conduct</span></a>
   </li>  
 </ul>
@@ -185,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Metagenomics</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson02-using-the-command-line/index.html">Using the Command Line</a></li><li class="breadcrumb-item"><a href="../../docs/lesson02-using-the-command-line/03-redirection.html">Redirection</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -199,7 +201,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson01-files-and-directories/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson01-files-and-directories/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Files and Directories</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -208,19 +210,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson01-files-and-directories/01-understanding-file-systems.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson01-files-and-directories/01-understanding-file-systems.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Understanding your file system</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson01-files-and-directories/02-logging-onto-cloud.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson01-files-and-directories/02-logging-onto-cloud.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Logging onto the Cloud</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson01-files-and-directories/03-shell-introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson01-files-and-directories/03-shell-introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introducing the Shell</span></a>
   </div>
 </li>
@@ -228,28 +230,28 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson02-using-the-command-line/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson02-using-the-command-line/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Using the Command Line</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson02-using-the-command-line/01-navigating-file-directories.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson02-using-the-command-line/01-navigating-file-directories.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Navigating Files and Directories</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson02-using-the-command-line/02-working-with-file.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson02-using-the-command-line/02-working-with-file.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Working with Files and Directories</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson02-using-the-command-line/03-redirection.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson02-using-the-command-line/03-redirection.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Redirection</span></a>
   </div>
 </li>
@@ -257,7 +259,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson03-qc-assembly/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson03-qc-assembly/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC &amp; Assembly</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -266,19 +268,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson03-qc-assembly/00-introduction-meta.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson03-qc-assembly/00-introduction-meta.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to Metagenomics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assessing Read Quality, Trimming and Filtering</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson03-qc-assembly/02-assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson03-qc-assembly/02-assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Metagenome Assembly</span></a>
   </div>
 </li>
@@ -286,7 +288,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson04-polishing/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson04-polishing/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Polishing</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -295,13 +297,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson04-polishing/01-polishing-assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson04-polishing/01-polishing-assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Polishing an assembly</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson04-polishing/02-QC-polished-assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson04-polishing/02-QC-polished-assembly.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC polished assembly</span></a>
   </div>
 </li>
@@ -309,7 +311,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson05-binning-functional-annotation/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson05-binning-functional-annotation/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Binning &amp; Functional Annotation</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -318,19 +320,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson05-binning-functional-annotation/01-binning.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson05-binning-functional-annotation/01-binning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Metagenome Binning</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson05-binning-functional-annotation/02-binning_quality.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson05-binning-functional-annotation/02-binning_quality.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC of metagenome bins</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson05-binning-functional-annotation/03-Functional-annotation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson05-binning-functional-annotation/03-Functional-annotation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Functional annotation</span></a>
   </div>
 </li>
@@ -338,7 +340,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson06-taxonomic-annotations/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson06-taxonomic-annotations/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Taxonomic Annotations</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -347,19 +349,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson06-taxonomic-annotations/01-taxonomic.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson06-taxonomic-annotations/01-taxonomic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Taxonomic Assignment</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Diversity Tackled With R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Taxonomic Analysis with R</span></a>
   </div>
 </li>
@@ -367,7 +369,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./docs/lesson07-automation-bash-scripts/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../../docs/lesson07-automation-bash-scripts/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Automating Analyses with Bash Scripts</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -376,13 +378,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson07-automation-bash-scripts/01-scripting-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson07-automation-bash-scripts/01-scripting-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction to Bash Scripting</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./docs/lesson07-automation-bash-scripts/02-base-automation-script.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson07-automation-bash-scripts/02-base-automation-script.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Base Automation Script</span></a>
   </div>
 </li>
@@ -398,20 +400,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link active" data-scroll-target="#prerequisites">Prerequisites</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
-  <li><a href="#course-format" id="toc-course-format" class="nav-link" data-scroll-target="#course-format">Course format</a></li>
-  <li><a href="#course-overview" id="toc-course-overview" class="nav-link" data-scroll-target="#course-overview">Course Overview</a></li>
+  <li><a href="#searching-files" id="toc-searching-files" class="nav-link active" data-scroll-target="#searching-files">Searching files</a></li>
+  <li><a href="#redirecting-output" id="toc-redirecting-output" class="nav-link" data-scroll-target="#redirecting-output">Redirecting output</a>
+  <ul class="collapse">
+  <li><a href="#redirecting-output-to-a-file-the-command" id="toc-redirecting-output-to-a-file-the-command" class="nav-link" data-scroll-target="#redirecting-output-to-a-file-the-command">Redirecting output to a file — the <code>&gt;</code> command</a></li>
+  <li><a href="#counting-number-of-lines-in-files-the-wc-program" id="toc-counting-number-of-lines-in-files-the-wc-program" class="nav-link" data-scroll-target="#counting-number-of-lines-in-files-the-wc-program">Counting number of lines in files — the <code>wc</code> program</a></li>
+  <li><a href="#the-command-redirects-and-overwrites" id="toc-the-command-redirects-and-overwrites" class="nav-link" data-scroll-target="#the-command-redirects-and-overwrites">The command <code>&gt;</code> redirects and overwrites</a></li>
+  <li><a href="#the-command-redirects-and-appends" id="toc-the-command-redirects-and-appends" class="nav-link" data-scroll-target="#the-command-redirects-and-appends">The command <code>&gt;&gt;</code> redirects and appends</a></li>
+  <li><a href="#redirecting-output-as-input-to-other-program-the-pipe-command" id="toc-redirecting-output-as-input-to-other-program-the-pipe-command" class="nav-link" data-scroll-target="#redirecting-output-as-input-to-other-program-the-pipe-command">Redirecting output as input to other program — the pipe <code>|</code> command</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson02-using-the-command-line/03-redirection.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson02-using-the-command-line/index.html">Using the Command Line</a></li><li class="breadcrumb-item"><a href="../../docs/lesson02-using-the-command-line/03-redirection.html">Redirection</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Metagenomics</h1>
-<p class="subtitle lead">Environmental Applications</p>
+<h1 class="title">Redirection</h1>
 </div>
 
 
@@ -428,103 +434,192 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This hands-on, online course teaches data analysis for metagenomics projects. It is aimed at those with little or no experience of using high performance computing (HPC) for data analysis. In the course we will cover:</p>
+<section id="searching-files" class="level2">
+<h2 class="anchored" data-anchor-id="searching-files">Searching files</h2>
+<p>We discussed in a previous episode how to search within a file using <code>less</code>. We can also search within files without even opening them, using <code>grep</code>. <code>grep</code> is a command-line utility for searching plain-text files for lines matching a specific set of characters (sometimes called a string) or a particular pattern (which can be specified using something called regular expressions). We’re not going to work with regular expressions in this lesson, and are instead going to specify the strings we are searching for. Let’s give it a try!</p>
+<blockquote class="blockquote">
+<h2 id="nucleotide-abbreviations" class="anchored">Nucleotide abbreviations</h2>
+<p>The four nucleotides that appear in DNA are abbreviated <code>A</code>, <code>C</code>, <code>T</code> and <code>G</code>. Unknown nucleotides are represented with the letter <code>N</code>. An <code>N</code> appearing in a sequencing file represents a position where the sequencing machine was not able to confidently determine the nucleotide in that position. You can think of an <code>N</code> as being aNy nucleotide at that position in the DNA sequence.</p>
+<p>{: .callout}</p>
+</blockquote>
+<p>We’ll search for strings inside of our fastq files. Let’s first make sure we are in the correct directory:</p>
+<pre><code>$ cd ~/cs_course/data/illumina_fastq</code></pre>
+<p>{: .bash}</p>
+<p>However, suppose we want to see how many reads in our file have bad segments containing three or more unclassified nucleotides (N) in a row.</p>
+<blockquote class="blockquote">
+<h2 id="determining-quality" class="anchored">Determining quality</h2>
+<p>In this lesson, we’re going to be manually searching for strings of bases within our sequence results to illustrate some principles of file searching. It can be really useful to do this type of searching to get a feel for the quality of your sequencing results, however, in your research you will most likely use a bioinformatics tool that has a built-in program for filtering out low-quality reads. You’ll learn how to use one such tool in <a href="https://cloud-span.github.io/nerc-metagenomics03-qc-assembly/02-QC-quality-raw-reads/index.html">a later lesson</a>.</p>
+<p>{: .callout}</p>
+</blockquote>
+<p>To search files we use a new command called <code>grep</code>. The name “grep” comes from an abbreviation of <strong>g</strong>lobal <strong>r</strong>egular <strong>e</strong>xpression <strong>p</strong>rint.</p>
+<p>Let’s search for the string NNN in the ERR4998593_1 file: ~~~ $ grep NNN ERR4998593_1.fastq ~~~ {: .bash}</p>
+<p>This command returns quite a lot of output to the terminal. Every single line in the ERR4998593_1 file that contains at least 3 consecutive Ns is printed to the terminal, regardless of how long or short the file is. We may be interested not only in the actual sequence which contains this string, but in the name (or identifier) of that sequence. Think back to the FASTQ format we discussed previously - if you need a reminder, you can click to reveal one below.</p>
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<h2 id="hint" class="anchored">Hint</h2>
+<p><img src="../fig/fasta_file_format_l2.png" class="img-fluid">{:width=“600px”} {: .solution} {: .challenge}</p>
+</blockquote>
+</blockquote>
+<p>To get all of the information about each read, we will return the line immediately before each match and the two lines immediately after each match.</p>
+<p>We can use the <code>-B</code> argument for grep to return a specific number of lines before each match. The <code>-A</code> argument returns a specific number of lines after each matching line. Here we want the line <em>before</em> and the two lines <em>after</em> each matching line, so we add <code>-B1 -A2</code> to our grep command:</p>
+<pre><code>$ grep -B1 -A2 NNN ERR4998593_1.fastq</code></pre>
+<p>{: .bash}</p>
+<p>One of the sets of lines returned by this command is:</p>
+<pre><code>@ERR4998593.50651366 50651366 length=151
+TCCTTGCGGAGCCGGGCATGCAGGNCCTGCAGGTAGNGGCGGCGGCAGGNGCCGCCGCCGTCTACCACGGTGTANCGNNCNANNNNNCANTCATCGACGGNNGGTGNGACNNCTGCGATCTTGCGNCGCCTGGTCTNGCGGCCATCCTCTN
++
+FFF,FFFFFFFF:,,F:F,FFFFF#,:F,FFFF:F,#,FFFFF::FF:,#FFFFFFFFF:F,FF,FFFF,F,FF#,F##:#:#####:F#FFFFFFF,FF##:FFF#F:F##FFF,FFFFFF,,,#FF:F:,FFFF#F:::F:FFF:FF,#</code></pre>
+<p>{: .output}</p>
+<blockquote class="blockquote">
+<h2 id="exercise" class="anchored">Exercise</h2>
+<ol type="1">
+<li><p>Search for the sequence <code>AAAACCCCGGGGTTTT</code> in the <code>ERR4998593_1.fastq</code> file. Have your search return all matching lines and the name (or identifier) for each sequence that contains a match. What is the output?</p></li>
+<li><p>Search for the sequence <code>AACCGGTTAACCGGTT</code> in both FASTQ files. Have your search return all matching lines and the name (or identifier) for each sequence that contains a match. How many matching sequences do you get? (this may take up to 4 minutes to complete so be patient!)</p></li>
+</ol>
+<blockquote class="blockquote">
+<h2 id="solution" class="anchored">Solution</h2>
+<ol type="1">
+<li><p><code>grep -B1 AAAACCCCGGGGTTTT ERR4998593_1.fastq</code></p>
+<pre><code>@ERR4998593.49988640 49988640 length=151
+GGTCCATGAAGCTTGTACTGCGCGCCGATATTCTCGAAGCCGAGGCCCTAGTCCGCAAAAAACAAAAACCCCGGGGTTTTGGCCCCGGGGTTTGTCGTTTGAGCGTTTGCCGCGGCGATCAGAACCGGTAGTTGACGCCGGCGCGAACGAT
+--
+@ERR4998593.16888007 16888007 length=151
+GCCGAGGCCCTAGTCCGCAAAAAACAAAAACCCCGGGGTTTTGGCCCCGGGGTTTGTCGTTTTAGCGTTTGCCGCGGCGATCAGAACCGGTAGTTGACGCCGGCGCGAACGATGTTGGTGGTGAACGACACGTTGTCGGTCACGAACGGTC
+--
+@ERR4998593.39668571 39668571 length=151
+CCCCGGGGCCAAAACCCCGGGGTTTTTGTTTTTTGCGGACTAGGCCTCGGCTTCGAGAATATCGGCGCGCAGTCCAAGCTTCATGGACCTGTCGTGACCCAAGATGGCGGATCAGGCGGGAGACTCAGGTTTTCCCGAAAGGTCTTTATGC</code></pre></li>
+<li><p><code>grep -B1 AACCGGTTAACCGGTT *.fastq</code></p>
+<pre><code>ERR4998593_1.fastq-@ERR4998593.64616570 64616570 length=151
+ERR4998593_1.fastq:GACAAGCTCATCTTCCAAAATCCGCAACGGTTTTTAAGCCAGTGCCCGAAATTTAGATTAACCGATTAACCGGTTAACCGGTTCGTAGGAGACGGGTAACGAGACTCTAACTCAAGTTTCGCATACTACCACCAAAACAGCCCGTCCGCGT
+--
+ERR4998593_1.fastq-@ERR4998593.64617528 64617528 length=151
+ERR4998593_1.fastq:GACAAGCTCATCTTCCAAAATCCGCAACGGTTTTTAAGCCAGTGCCCGAAATTTAGATTAACCGATTAACCGGTTAACCGGTTCGTAGGAGACGGGTAACGAGACTCTAACTCAAGTTTCGCATACTACCACCAAAACAGCCCGTCCGCGT
+--
+ERR4998593_1.fastq-@ERR4998593.52741374 52741374 length=151
+ERR4998593_1.fastq:GACAAGCTCATCTTCCAAAATCCGCAACGGTTTTTAAGCCAGTGCCCGAAATTTAGATTAACCGATTAACCGGTTAACCGGTTCGTAGGAGACGGGTAACGAGACTCTAACTCAAGTTTCGCATACTACCACCAAAACAGCCCGTCCGCGT
+--
+ERR4998593_2.fastq-@ERR4998593.2096117 2096117 length=151
+ERR4998593_2.fastq:ATTGGCTGGCGGCAGTCGCGTTGGCGGCTTGGCGGTTAACCGGTTAACCGGTTGACTAATGGGAGGATAACACTTCGCGACAGGAACGCAACACAATTCCGGATCAATAGGGCAACTGCCCTGGGATGGTTTTTGAGGTGGACACGGACCA
+--
+ERR4998593_2.fastq-@ERR4998593.11478972 11478972 length=151
+ERR4998593_2.fastq:GAACAGGGCTGTTAGTTAACCGGTCAAAGCCGCCTTAACCGGTTAACCGGTTGTAACGCCCCGCTATGCTCGTTGTGTCCGCTATCTCTGTGATTGTGTTTGTTTCGGTGTTTGCTTCGGTTTGCCGTTTGTCTATGCCGAGAAGTGGAGG</code></pre></li>
+</ol>
+<p>{: .solution} {: .challenge}</p>
+</blockquote>
+</blockquote>
+</section>
+<section id="redirecting-output" class="level2">
+<h2 class="anchored" data-anchor-id="redirecting-output">Redirecting output</h2>
+<p><code>grep</code> allowed us to identify sequences in our FASTQ files that match a particular pattern. All of these sequences were printed to our terminal screen, but in order to work with these sequences and perform other operations on them, we will need to capture that output in some way.</p>
+<p>We can do this with something called “redirection”. The idea is that we are taking what would ordinarily be printed to the terminal screen and redirecting it to another location. In our case, we want to print this information to a file so that we can look at it later and use other commands to analyse this data.</p>
+<section id="redirecting-output-to-a-file-the-command" class="level3">
+<h3 class="anchored">Redirecting output to a file — the <code>&gt;</code> command</h3>
+<p>The command for redirecting output to a file is <code>&gt;</code>.</p>
+<p>Let’s try out this command and copy all the records (including all four lines of each record) in our FASTQ files that contain ‘NNN’ to another file called <code>bad_reads.txt</code>. The new flag <code>--no-group-separator</code> stops grep from putting a dashed line (–) between matches. The reason this is necessary will become apparent shortly.</p>
+<pre><code>$ grep -B1 -A2 NNN --no-group-separator ERR4998593_1.fastq &gt; bad_reads.txt</code></pre>
+<p>{: .bash}</p>
+<p>The prompt should sit there a little bit, and then it should look like nothing happened. But type <code>ls</code>. You should see a new file called <code>bad_reads.txt</code>.</p>
+<blockquote class="blockquote">
+<h2 id="file-extensions" class="anchored" data-anchor-id="redirecting-output-to-a-file-the-command">File extensions</h2>
+<p>You might be confused about why we’re naming our output file with a <code>.txt</code> extension. After all, it will be holding FASTQ formatted data that we’re extracting from our FASTQ files. Won’t it also be a FASTQ file? The answer is, yes - it will be a FASTQ file and it would make sense to name it with a <code>.fastq</code> extension. However, using an extension such as <code>.txt</code> makes it easy to distinguish the files you may generate through some exploratory processing, as the one we just made with the <code>grep</code> program, from the original sequencing files of your project. So you can easily select all the files with a specific extension for further processing using the wildcard <code>*</code> character, for example: <code>grep .. *.fastq</code> or <code>mv *.txt newlocation</code>. {: .callout}</p>
+</blockquote>
+</section>
+<section id="counting-number-of-lines-in-files-the-wc-program" class="level3">
+<h3 class="anchored">Counting number of lines in files — the <code>wc</code> program</h3>
+<p>We can check the number of lines in our new file using a command called <code>wc</code>. <code>wc</code> stands for <strong>word count</strong>. This command counts the number of words, lines, and characters in a file. The FASTQ file may change over time, so given the potential for updates, make sure the output of your <code>wc</code> command below matches your instructor’s output.</p>
+<p>As of February 2023, wc gives the following output:<br>
+~~~ $ wc bad_reads.txt ~~~ {: .bash}</p>
+<pre><code>  52   78 4511 bad_reads.txt</code></pre>
+<p>{: .output}</p>
+<p>This will tell us the number of lines, words and characters in the file. If we want only the number of lines, we can use the <code>-l</code> flag for <code>lines</code>.</p>
+<pre><code>$ wc -l bad_reads.txt</code></pre>
+<p>{: .bash}</p>
+<pre><code>52 bad_reads.txt</code></pre>
+<p>{: .output}</p>
+<p>The <code>--no-group-separator</code> flag used above prevents grep from adding unnecessary extra lines to the file which would alter the number of lines present.</p>
+<blockquote class="blockquote">
+<h2 id="exercise-1" class="anchored" data-anchor-id="counting-number-of-lines-in-files-the-wc-program">Exercise</h2>
+<p>Try these questions on your own first. Then, if you are attending an instructor-led workshop, discuss your answers in your breakout room. Nominate someone from your group to feed back on the forum.</p>
+<ol type="1">
+<li>How many sequences are there in <code>ERR4998593_1.fastq</code>? Remember that every sequence is formed by four lines.</li>
+<li>How many sequences in <code>ERR4998593_1.fastq</code> contain at least 5 consecutive Ns?</li>
+</ol>
+<blockquote class="blockquote">
+<h2 id="solution-1" class="anchored">Solution</h2>
+<ol type="1">
+<li></li>
+</ol>
+<pre><code>$ wc -l ERR4998593_1.fastq</code></pre>
+<p>{: .bash}</p>
+<pre><code>137054440 ERR4998593_1.fastq</code></pre>
+<p>{: .output} Now you can divide this number by four to get the number of sequences in your fastq file (34263610).</p>
+<ol start="2" type="1">
+<li></li>
+</ol>
+<pre><code>$ grep NNNNN ERR4998593_1.fastq &gt; bad_reads.txt
+$ wc -l bad_reads.txt</code></pre>
+<p>{: .bash}</p>
+<pre><code>3 bad_reads.txt</code></pre>
+<p>{: .output} {: .solution} {: .challenge}</p>
+</blockquote>
+</blockquote>
+</section>
+<section id="the-command-redirects-and-overwrites" class="level3">
+<h3 class="anchored" data-anchor-id="the-command-redirects-and-overwrites">The command <code>&gt;</code> redirects and overwrites</h3>
+<p>We might want to search multiple FASTQ files for sequences that match our search pattern. However, we need to be careful, because each time we use the <code>&gt;</code> command to redirect output to a file, the new output will replace the output that was already present in the file. This is called “overwriting” and, just like you don’t want to overwrite your video recording of your kid’s first birthday party, you also want to avoid overwriting your data files.</p>
+<pre><code>$ grep -B1 -A2 NNN --no-group-separator ERR4998593_1.fastq &gt; bad_reads.txt
+$ wc -l bad_reads.txt</code></pre>
+<p>{: .bash}</p>
+<pre><code>52 bad_reads.txt</code></pre>
+<p>{: .output}</p>
+<pre><code>$ grep -B1 -A2 NNNNNNNNNN --no-group-separator ERR4998593_1.fastq &gt; bad_reads.txt
+$ wc -l bad_reads.txt</code></pre>
+<p>{: .bash}</p>
+<pre><code>0 bad_reads.txt</code></pre>
+<p>{: .output}</p>
+<p>Here, the output of our second call to <code>wc</code> shows that we no longer have any lines in our <code>bad_reads.txt</code> file. This is because the second string we searched (<code>NNNNNNNNNN</code>) does not match any strings in the file. So our file was overwritten and is now empty.</p>
+</section>
+<section id="the-command-redirects-and-appends" class="level3">
+<h3 class="anchored" data-anchor-id="the-command-redirects-and-appends">The command <code>&gt;&gt;</code> redirects and appends</h3>
+<p>We can avoid overwriting our files by using the command <code>&gt;&gt;</code>. <code>&gt;&gt;</code> is known as the “append redirect” and will append new output to the end of a file, rather than overwriting it.</p>
+<pre><code>$ grep -B1 -A2 NNN --no-group-separator ERR4998593_1.fastq &gt; bad_reads.txt
+$ wc -l bad_reads.txt</code></pre>
+<p>{: .bash}</p>
+<pre><code>52 bad_reads.txt</code></pre>
+<p>{: .output}</p>
+<pre><code>$ grep -B1 -A2 NNNNNNNNNN --no-group-separator ERR4998593_1.fastq &gt;&gt; bad_reads.txt
+$ wc -l bad_reads.txt</code></pre>
+<p>{: .bash}</p>
+<pre><code>52 bad_reads.txt</code></pre>
+<p>{: .output}</p>
+<p>The output of our second call to <code>wc</code> shows that we have not overwritten our original data.</p>
+</section>
+<section id="redirecting-output-as-input-to-other-program-the-pipe-command" class="level3">
+<h3 class="anchored">Redirecting output as input to other program — the pipe <code>|</code> command</h3>
+<p>Since we might have multiple different criteria we want to search for, creating a new output file each time has the potential to clutter up our workspace. We also thus far haven’t been interested in the actual contents of those files, only in the number of reads that we’ve found. We created the files to store the reads and then counted the lines in the file to see how many reads matched our criteria. There’s a way to do this, however, that doesn’t require us to create these intermediate files - the pipe command (<code>|</code>).</p>
+<p>This is probably not a key on your keyboard you use very much, so let’s all take a minute to find that key. For the standard QWERTY keyboard layout, the <code>|</code> character can be found using the key combination</p>
 <ul>
-<li>navigating file directories and using the command line</li>
-<li>logging into a remote cloud instance</li>
-<li>using common commands and running analysis programs in the command line</li>
-<li>what is metagenomics?</li>
-<li>following a metagenomics analysis workflow including:
-<ul>
-<li>performing quality control on reads</li>
-<li>assembly of reads into a metagenome</li>
-<li>improving your assembly with polishing</li>
-<li>binning into species/metagenome-assembled genomes (MAGs)</li>
-<li>taxonomic assignment and functional annotation using your binned reads</li>
-</ul></li>
+<li><kbd>Shift</kbd>+<kbd>&lt;/kbd&gt;</kbd></li>
 </ul>
-<p>The course is taught as a mixture of live coding, online lectures, self-study and drop-in sessions.</p>
-<section id="prerequisites" class="level2">
-<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Biological concepts and software setup
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This course assumes no prior experience with the tools covered in the workshop but learners are expected to have some familiarity with biological concepts, including the concept of genomes and microbiomes. Participants should bring their own laptops and plan to participate actively.</p>
-<p>To get started, follow the directions in the Setup tab to get access to the required software and data for this workshop. <strong>Windows users</strong> need to install Git Bash in their laptop. <strong>Mac users</strong> may need to configure the <strong>terminal</strong> program in their laptop to use the Bash shell.</p>
-</div>
-</div>
-</section>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-About the data used in the course
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This course uses data from a 2022 paper published in BMC Environmental Microbiome titled <a href="https://environmentalmicrobiome.biomedcentral.com/articles/10.1186/s40793-022-00424-2">In-depth characterization of denitrifier communities across different soil ecosystems in the tundra</a>. In this course we will compare data from two of the sites studied.</p>
-<p>You can read more about the data used in the course <a href="data/index.html">here</a>.</p>
-</div>
-</div>
-</section>
-<section id="course-format" class="level2">
-<h2 class="anchored" data-anchor-id="course-format">Course format</h2>
-<p>This workshop is designed to be run on pre-imaged Amazon Web Services (AWS) instances. All the software and data used in the workshop are hosted on an Amazon Machine Image (AMI). We will give you details as to how to access these instances after registration.</p>
-<p>The course will take place over three weeks and will combine live coding and teaching with offline work. We will guide you through the analysis each session but some steps may need to completed offline due to the amount of time they take to complete. There will also be drop-in sessions to offer support and troubleshooting help, and a Slack workspace for questions.</p>
-</section>
-<section id="course-overview" class="level2">
-<h2 class="anchored" data-anchor-id="course-overview">Course Overview</h2>
-<table class="table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Overview</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="./docs/lesson01-files-and-directories/index.html">Files and Directories</a></td>
-<td>Learn about files and directories, log onto a cloud instance and get a basic introduction to the shell.</td>
-</tr>
-<tr class="even">
-<td><a href="./docs/lesson02-using-the-command-line/index.html">Using the Command Line</a></td>
-<td>Learn more about using the shell to navigate directories, manipulate and search files, and combine existing commands to do new things.</td>
-</tr>
-<tr class="odd">
-<td><a href="./docs/lesson03-qc-assembly/index.html">QC &amp; Assembly</a></td>
-<td>How to quality control and assemble a genome.</td>
-</tr>
-<tr class="even">
-<td><a href="./docs/lesson04-polishing/index.html">Polishing</a></td>
-<td>How to use short reads to polish your metagenome assembly</td>
-</tr>
-<tr class="odd">
-<td><a href="./docs/lesson05-binning-functional-annotation/index.html">Binning &amp; Functional Annotation</a></td>
-<td>How to separate an assembly into MAGs and add functional annotation to these MAGs.</td>
-</tr>
-<tr class="even">
-<td><a href="./docs/lesson06-taxonomic-annotations/index.html">Taxonomic Annotations</a></td>
-<td>How to add taxonomic annotations onto contigs in an assembly.</td>
-</tr>
-<tr class="odd">
-<td><a href="./docs/lesson07-automation-bash-scripts/index.html">Automating Analyses with Bash Scripts</a></td>
-<td>How to automate the analyses tasks in the previous lessons using Bash scripts.</td>
-</tr>
-</tbody>
-</table>
+<p>What <code>|</code> does is take the output that is scrolling by on the terminal and uses that output as input to another command. When our output was scrolling by, we might have wished we could slow it down and look at it, like we can with <code>less</code>. Well it turns out that we can! We can redirect our output from our <code>grep</code> call through the <code>less</code> command.</p>
+<pre><code>$ grep -B1 -A2 NNN ERR4998593_1.fastq | less</code></pre>
+<p>{: .bash}</p>
+<p>We can now see the output from our <code>grep</code> call within the <code>less</code> interface. We can use the up and down arrows to scroll through the output and use <code>q</code> to exit <code>less</code>.</p>
+<p>If we don’t want to create a file before counting lines of output from our <code>grep</code> search, we could directly pipe the output of the grep search to the command <code>wc -l</code>. This can be helpful for investigating your output if you are not sure you would like to save it to a file.</p>
+<pre><code>$ grep -B1 -A2 NNN --no-group-separator ERR4998593_1.fastq | wc -l</code></pre>
+<p>{: .bash}</p>
+<pre><code>52</code></pre>
+<p>{: .output}</p>
+<blockquote class="blockquote">
+<h2 id="custom-grep-control" class="anchored" data-anchor-id="redirecting-output-as-input-to-other-program-the-pipe-command">Custom <code>grep</code> control</h2>
+<p>Use <code>man grep</code> to read more about other options to customize the output of <code>grep</code> including extended options, anchoring characters, and much more.</p>
+<p>{: .callout}</p>
+</blockquote>
+<p>Redirecting output is often not intuitive, and can take some time to get used to. Once you’re comfortable with redirection, however, you’ll be able to combine any number of commands to do all sorts of exciting things with your data! We’ll be using the redirect <code>&gt;</code> and pipe <code>|</code> later in the course as part of our analysis workflow, so you will get lots of practice using them.</p>
+<p>None of the command line programs we’ve been learning do anything all that impressive on their own, but when you start chaining them together, you can do some really powerful things very efficiently.</p>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
@@ -937,6 +1032,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/lesson02-using-the-command-line/02-working-with-file.html" class="pagination-link" aria-label="Working with Files and Directories">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Working with Files and Directories</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/lesson03-qc-assembly/index.html" class="pagination-link" aria-label="QC &amp; Assembly">
+        <span class="nav-page-text">QC &amp; Assembly</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -946,27 +1053,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
-    <a class="nav-link" href="./about.qmd">
+    <a class="nav-link" href="../../about.qmd">
 <p>About</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./docs/faq/index.qmd">
+    <a class="nav-link" href="../../docs/faq/index.qmd">
 <p>FAQ</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./license.qmd">
+    <a class="nav-link" href="../../license.qmd">
 <p>License</p>
 </a>
   </li>  
     <li class="nav-item">
-    <a class="nav-link" href="./trademark.qmd">
+    <a class="nav-link" href="../../trademark.qmd">
 <p>Trademark</p>
 </a>
   </li>  
 </ul>
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson02-using-the-command-line/03-redirection.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

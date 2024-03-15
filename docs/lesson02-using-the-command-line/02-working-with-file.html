@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.551">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Automating Metagenomics Analyses with Bash Scripts - Working with Files and Directories</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../docs/lesson02-using-the-command-line/03-redirection.html" rel="next">
+<link href="../../docs/lesson02-using-the-command-line/01-navigating-file-directories.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/cloud-span-icon.png" alt="Cloud-SPAN logo." class="navbar-logo">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lessons" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Lessons</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-lessons">    
+        <li>
+    <a class="dropdown-item" href="../../index.html">
+ <span class="dropdown-text">Course Overview</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/lesson01-files-and-directories/index.html">
+ <span class="dropdown-text">Files and Directories</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/lesson02-using-the-command-line/index.html">
+ <span class="dropdown-text">Using the Command Line</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/lesson03-qc-assembly/index.html">
+ <span class="dropdown-text">QC &amp; Assembly</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/lesson04-polishing/index.html">
+ <span class="dropdown-text">Polishing</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/lesson05-binning-functional-annotation/index.html">
+ <span class="dropdown-text">Binning and Functional Annotation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/lesson06-taxonomic-annotations/index.html">
+ <span class="dropdown-text">Taxonomic Annotations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/lesson07-automation-bash-scripts/index.html">
+ <span class="dropdown-text">Automating Analyses with Bash Scripts</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/miscellanea/setup.html"> 
+<span class="menu-text">Setup</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-extras" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Extras</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-extras">    
+        <li>
+    <a class="dropdown-item" href="../../docs/miscellanea/reference.qmd">
+ <span class="dropdown-text">Reference</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/miscellanea/about.html">
+ <span class="dropdown-text">About</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/miscellanea/data.qmd">
+ <span class="dropdown-text">Data</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/miscellanea/faq.qmd">
+ <span class="dropdown-text">Frequently Asked Questions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../docs/miscellanea/instructornotes.qmd">
+ <span class="dropdown-text">Instructor Notes</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/miscellanea/license.html"> 
+<span class="menu-text">License</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../docs/miscellanea/codeofconduct.html"> 
+<span class="menu-text">Code of Conduct</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson02-using-the-command-line/index.html">Using the Command Line</a></li><li class="breadcrumb-item"><a href="../../docs/lesson02-using-the-command-line/02-working-with-file.html">Working with Files and Directories</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../docs/lesson01-files-and-directories/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Files and Directories</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson01-files-and-directories/01-understanding-file-systems.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Understanding your file system</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson01-files-and-directories/02-logging-onto-cloud.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Logging onto the Cloud</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson01-files-and-directories/03-shell-introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducing the Shell</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../docs/lesson02-using-the-command-line/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using the Command Line</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson02-using-the-command-line/01-navigating-file-directories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Navigating Files and Directories</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson02-using-the-command-line/02-working-with-file.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Working with Files and Directories</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson02-using-the-command-line/03-redirection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Redirection</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../docs/lesson03-qc-assembly/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">QC &amp; Assembly</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson03-qc-assembly/00-introduction-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Metagenomics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assessing Read Quality, Trimming and Filtering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson03-qc-assembly/02-assembly.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Metagenome Assembly</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../docs/lesson04-polishing/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Polishing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson04-polishing/01-polishing-assembly.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Polishing an assembly</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson04-polishing/02-QC-polished-assembly.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">QC polished assembly</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../docs/lesson05-binning-functional-annotation/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Binning &amp; Functional Annotation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson05-binning-functional-annotation/01-binning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Metagenome Binning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson05-binning-functional-annotation/02-binning_quality.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">QC of metagenome bins</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson05-binning-functional-annotation/03-Functional-annotation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Functional annotation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../docs/lesson06-taxonomic-annotations/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Taxonomic Annotations</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson06-taxonomic-annotations/01-taxonomic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Taxonomic Assignment</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diversity Tackled With R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Taxonomic Analysis with R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../docs/lesson07-automation-bash-scripts/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Automating Analyses with Bash Scripts</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson07-automation-bash-scripts/01-scripting-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Bash Scripting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson07-automation-bash-scripts/02-base-automation-script.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Base Automation Script</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#working-with-files" id="toc-working-with-files" class="nav-link active" data-scroll-target="#working-with-files">Working with Files</a>
+  <ul class="collapse">
+  <li><a href="#our-data-set-fastq-files" id="toc-our-data-set-fastq-files" class="nav-link" data-scroll-target="#our-data-set-fastq-files">Our data set: FASTQ files</a></li>
+  <li><a href="#wildcards" id="toc-wildcards" class="nav-link" data-scroll-target="#wildcards">Wildcards</a></li>
+  </ul></li>
+  <li><a href="#command-history" id="toc-command-history" class="nav-link" data-scroll-target="#command-history">Command History</a></li>
+  <li><a href="#examining-files-the-less-program" id="toc-examining-files-the-less-program" class="nav-link" data-scroll-target="#examining-files-the-less-program">Examining Files — the <code>less</code> program</a>
+  <ul class="collapse">
+  <li><a href="#some-navigation-commands-in-less" id="toc-some-navigation-commands-in-less" class="nav-link" data-scroll-target="#some-navigation-commands-in-less">Some navigation commands in <code>less</code>:</a></li>
+  <li><a href="#other-programs-to-look-into-files-cat-more-head-and-tail" id="toc-other-programs-to-look-into-files-cat-more-head-and-tail" class="nav-link" data-scroll-target="#other-programs-to-look-into-files-cat-more-head-and-tail">Other programs to look into files: <code>cat</code>, <code>more</code>, <code>head</code>, and <code>tail</code></a></li>
+  </ul></li>
+  <li><a href="#creating-moving-copying-and-removing-files" id="toc-creating-moving-copying-and-removing-files" class="nav-link" data-scroll-target="#creating-moving-copying-and-removing-files">Creating, moving, copying, and removing files</a>
+  <ul class="collapse">
+  <li><a href="#copying-files" id="toc-copying-files" class="nav-link" data-scroll-target="#copying-files">Copying Files</a></li>
+  <li><a href="#creating-directories" id="toc-creating-directories" class="nav-link" data-scroll-target="#creating-directories">Creating Directories</a></li>
+  <li><a href="#moving-renaming-files-and-directories" id="toc-moving-renaming-files-and-directories" class="nav-link" data-scroll-target="#moving-renaming-files-and-directories">Moving / Renaming files and directories</a></li>
+  <li><a href="#removing-files-and-directories" id="toc-removing-files-and-directories" class="nav-link" data-scroll-target="#removing-files-and-directories">Removing files and directories</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson02-using-the-command-line/02-working-with-file.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson02-using-the-command-line/index.html">Using the Command Line</a></li><li class="breadcrumb-item"><a href="../../docs/lesson02-using-the-command-line/02-working-with-file.html">Working with Files and Directories</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Working with Files and Directories</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="working-with-files" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-files">Working with Files</h2>
+<section id="our-data-set-fastq-files" class="level3">
+<h3 class="anchored" data-anchor-id="our-data-set-fastq-files">Our data set: FASTQ files</h3>
+<p>Now that we know how to navigate around our directory structure, let’s start working with our sequencing files. We are looking at the results from a short-read sequencing experiment, which are stored in our <code>illumina_fastq</code> directory.</p>
+</section>
+<section id="wildcards" class="level3">
+<h3 class="anchored">Wildcards</h3>
+<p>Navigate to your <code>illumina_fastq</code> directory:</p>
+<pre><code>$ cd ~/cs_course/data/illumina_fastq</code></pre>
+<p>{: .bash}</p>
+<p>We are interested in looking at the fastq files in this directory. We can list all files with the .fastq extension using the command:</p>
+<pre><code>$ ls *.fastq</code></pre>
+<p>{: .bash}</p>
+<pre><code>ERR4998593_1.fastq  ERR4998593_2.fastq</code></pre>
+<p>{: .output}</p>
+<p>The <code>*</code> character is a special type of character called a wildcard, which can be used to represent any number of any type of character. Thus, <code>*.fastq</code> matches every file that ends with <code>.fastq</code>.</p>
+<p>This command:</p>
+<pre><code>$ ls *_2.fastq</code></pre>
+<p>{: .bash}</p>
+<pre><code>ERR4998593_2.fastq</code></pre>
+<p>{: .output}</p>
+<p>lists only the file that ends with <code>_2.fastq</code>.</p>
+<p>This command:</p>
+<pre><code>$ ls /usr/bin/*.sh</code></pre>
+<p>{: .bash}</p>
+<pre><code>/usr/bin/amuFormat.sh  /usr/bin/gettext.sh  /usr/bin/gvmap.sh</code></pre>
+<p>{: .output}</p>
+<p>Lists every file in <code>/usr/bin</code> that ends in the characters <code>.sh</code>. Note that the output displays <strong>full</strong> paths to files, since each result starts with <code>/</code>.</p>
+<blockquote class="blockquote">
+<h2 id="exercise" class="anchored" data-anchor-id="wildcards">Exercise</h2>
+<p>What command would you use for each of the following tasks? Start from your current directory using a single&nbsp;<code>ls</code>&nbsp;command for each:</p>
+<ol type="1">
+<li>List all of the files in <code>/usr/bin</code> that start with the letter ‘c’.</li>
+<li>List all of the files in <code>/usr/bin</code> that contain the letter ‘a’.</li>
+<li>List all of the files in <code>/usr/bin</code> that end with the letter ‘o’.</li>
+<li>List all of the files in <code>/usr/bin</code> that contain the letter ‘a’ or the letter ‘c’.</li>
+</ol>
+<p>Bonus: What would the output look like if a wildcard could <em>not</em> be matched? Try listing all files that start with ‘missing’.</p>
+<p>Hint: Question 4 requires a Unix wildcard that we haven’t talked about yet. Try searching the internet for information about Unix wildcards to find what you need to solve the bonus problem.</p>
+<blockquote class="blockquote">
+<h2 id="solution" class="anchored">Solution</h2>
+<ol type="1">
+<li><code>ls /usr/bin/c*</code></li>
+<li><code>ls /usr/bin/*a*</code></li>
+<li><code>ls /usr/bin/*o</code><br>
+</li>
+<li><code>ls /usr/bin/*[ac]*</code></li>
+</ol>
+<p>Bonus: <code>ls: cannot access 'missing*': No such file or directory</code> {: .solution} {: .challenge}</p>
+</blockquote>
+</blockquote>
+</section>
+</section>
+<section id="command-history" class="level2">
+<h2 class="anchored" data-anchor-id="command-history">Command History</h2>
+<p>If you want to repeat a command that you’ve run recently, you can access previous commands using the up arrow on your keyboard to go back to the most recent command. Likewise, the down arrow takes you forward in the command history.</p>
+<p>A few more useful shortcuts:</p>
+<ul>
+<li><kbd>Ctrl</kbd>+<kbd>C</kbd> will cancel the command you are writing, and give you a fresh prompt.</li>
+<li><kbd>Ctrl</kbd>+<kbd>R</kbd> will do a reverse-search through your command history. This is very useful.</li>
+<li><kbd>Ctrl</kbd>+<kbd>L</kbd> or the <code>clear</code> command will clear your screen.</li>
+</ul>
+<p>You can also review your recent commands with the <code>history</code> command, by entering:</p>
+<pre><code>$ history</code></pre>
+<p>{: .bash}</p>
+<p>to see a numbered list of recent commands. You can reuse one of these commands directly by referring to the number of that command.</p>
+<p>For example, if your history looked like this:</p>
+<pre><code>259  ls *
+260  ls /usr/bin/*.sh
+261  ls *R1*fastq</code></pre>
+<p>{: .output}</p>
+<p>then you could repeat command #260 by entering:</p>
+<pre><code>$ !260</code></pre>
+<p>{: .bash}</p>
+<p>Type <code>!</code> (exclamation point) and then the number of the command from your history. You will be glad you learned this when you need to re-run very complicated commands. For more information on advanced usage of <code>history</code>, read section 9.3 of <a href="https://www.gnu.org/software/bash/manual/html_node/index.html">Bash manual</a>.</p>
+</section>
+<section id="examining-files-the-less-program" class="level2">
+<h2 class="anchored" data-anchor-id="examining-files-the-less-program">Examining Files — the <code>less</code> program</h2>
+<p>We now know how to switch directories, run programs, and look at the contents of directories, but how do we look at the contents of files?</p>
+<p>One way to examine a file is to open the file in a read-only format and navigate through it using a program called <code>less</code>. The commands for navigating <code>less</code> are the same as the <code>man</code> program:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>key</th>
+<th>action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><kbd>Space</kbd></td>
+<td>to go forward</td>
+</tr>
+<tr class="even">
+<td><kbd>b</kbd></td>
+<td>to go backward</td>
+</tr>
+<tr class="odd">
+<td><kbd>g</kbd></td>
+<td>to go to the beginning</td>
+</tr>
+<tr class="even">
+<td><kbd>G</kbd></td>
+<td>to go to the end</td>
+</tr>
+<tr class="odd">
+<td><kbd>q</kbd></td>
+<td>to quit</td>
+</tr>
+</tbody>
+</table>
+<p>Enter the following command from within the <code>illumina_fastq</code> directory:</p>
+<pre><code>$ cd ~/cs_course/data/illumina_fastq
+$ less ERR4998593_1.fastq</code></pre>
+<p>{: .bash}</p>
+<blockquote class="blockquote">
+<h2 id="fastq-format" class="anchored">FASTQ format</h2>
+<p>The contents might look a bit confusing. That’s because they are in FASTQ format, a popular way to store sequencing data in text-based format. These files contain both sequences and information about each sequence’s read accuracy.</p>
+<p><img src="../fig/fasta_file_format_l2.png" class="img-fluid">{:width=“600px”}</p>
+<p>Each sequence is described in four lines:</p>
+<table class="table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Line</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Always begins with ‘@’ and gives the sequence identifier and an optional description</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>The actual DNA sequence</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Always begins with a ‘+’ and sometimes the same info in line 1</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Has a string of characters which represent the PHRED quality score for each of the bases in line 2; must have same number of characters as line 2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="phred-score" class="anchored">PHRED score</h2>
+<pre><code>Quality encoding: !"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJ
+                  |         |         |         |         |
+Quality score:    01........11........21........31........41   </code></pre>
+<p>{: .output}</p>
+<p>Quality is interpreted as the probability of an incorrect base call. To make it possible to line up each individual nucleotide with its quality score, the numerical score is encoded by a single character. The quality score represents the probability that the corresponding nucleotide call is incorrect. It is a logarithmic scale so a quality score of 10 reflects a base call accuracy of 90%, but a quality score of 20 reflects a base call accuracy of 99%.<br>
+{: .callout}</p>
+</blockquote>
+<blockquote class="blockquote">
+<h2 id="exercise-1" class="anchored">Exercise</h2>
+<ol type="1">
+<li>Open the <code>~/cs_course/data/illumina_fastq/ERR4998593_1.fastq</code> file in <code>less</code>. What is the last line of the file? (Hint: use the shortcuts above to speed things up)</li>
+</ol>
+<blockquote class="blockquote">
+<h2 id="solution-1" class="anchored">Solution</h2>
+<ol type="1">
+<li><code>:FFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFF:FFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFF:FFF:FFFFFFFFFFFFFF:FFFFFF:FF:FFFFFFFFFFFFFFFFFFFFFF,F,FFF,FFFFFF,FFFF</code> {: .solution} {: .challenge}</li>
+</ol>
+</blockquote>
+</blockquote>
+<section id="some-navigation-commands-in-less" class="level3">
+<h3 class="anchored">Some navigation commands in <code>less</code>:</h3>
+<p><code>less</code> also gives you a way of searching through files. Use the “/” key to begin a search. Enter the word you would like to search for and press <code>enter</code>. The screen will jump to the next location where that word is found.</p>
+<p><strong>Shortcut:</strong> If you hit “/” then “enter”, <code>less</code> will repeat the previous search. <code>less</code> searches from the current location and works its way forward. Scroll up a couple lines on your terminal to verify you are at the beginning of the file. Note, if you are at the end of the file and search for the sequence “CAA”, <code>less</code> will not find it. You either need to go to the beginning of the file (by typing <code>g</code>) and search again using <code>/</code> or you can use <code>?</code> to search backwards in the same way you used <code>/</code> previously.</p>
+<p>For instance, let’s search forward for the sequence <code>TTTTT</code> in our file. You can see that we go right to that sequence, what it looks like, and where it is in the file. If you continue to type <code>/</code> and hit return, you will move forward to the next instance of this sequence motif. If you instead type <code>?</code> and hit return, you will search backwards and move up the file to previous examples of this motif.</p>
+<blockquote class="blockquote">
+<h2 id="exercise-2" class="anchored" data-anchor-id="some-navigation-commands-in-less">Exercise</h2>
+<p>What are the next three nucleotides (characters) after the first instance of the sequence quoted above (<code>TTTTT</code>)?</p>
+<p>Share your answer to o see if it matches everyone else’s!</p>
+<blockquote class="blockquote">
+<h2 id="solution-2" class="anchored">Solution</h2>
+<p><code>CTT</code> {: .solution} {: .challenge}</p>
+</blockquote>
+</blockquote>
+<p>Remember, the <code>man</code> program actually uses <code>less</code> internally and therefore uses the same commands, so you can search documentation using “/” as well!</p>
+</section>
+<section id="other-programs-to-look-into-files-cat-more-head-and-tail" class="level3">
+<h3 class="anchored" data-anchor-id="other-programs-to-look-into-files-cat-more-head-and-tail">Other programs to look into files: <code>cat</code>, <code>more</code>, <code>head</code>, and <code>tail</code></h3>
+<p>Another way to look at files is using the command <code>cat</code>. This command prints out the entire contents of the file to the console. In large files, like the ones we’re working with today, this can take a long time and should generally be avoided. For small files, it can be a useful tool.</p>
+<p>The <code>more</code> command prints to the console only as much content of a file as it fits in the screen, and waits for you to press the space bar to print the following portion of the file likweise, and so on until either the last portion of the file is printed or you press the <code>q</code> key (for quit) to exit <code>more</code>.</p>
+<p>There’s another final way that we can look at files, and in this case, just look at part of them. This can be particularly useful if we just want to see the beginning or end of the file, or see how it’s formatted.</p>
+<p>The commands are <code>head</code> and <code>tail</code> and they let you look at the beginning and end of a file, respectively.</p>
+<pre><code>$ head ERR4998593_1.fastq</code></pre>
+<p>{: .bash}</p>
+<pre><code>@ERR4998593.40838091 40838091 length=151
+CCACATGCTTTAAGTGCATGTGGTACTGCTCCAGGACCAGCATTGTAGGTCGCCAATGCTTTGGCGTAGGTGCCATCAAACATATTCGTGTAATGAGCCATGAGATGGGCTGCTCCCTTCAATGCATCAACCGGATTCCACGGATCAATGC
++
+:FFFFFFF:,FFF:FFFFFFFFFFFFFFFFFFFF:FFFF:FFFFFFFFFFF:FFFFFFFFF:FFFF:FFFFFFFFFFFFFFFFFFF:FFFF,FFFFFFF,FFF:FF,FFFFFFF::FF::FFFF:FFFFF:,:FFFFF,,FFFFFFFF,,F
+@ERR4998593.57624042 57624042 length=151
+CCTTACCACACCGGGGCTGTGGCGTTCGACCCCATCGGCAAGGCACTCTGGGTTTCCGATAGCTCGCACCATCGGCTGCTGCGCGTCCGCAATCCGGACGGCTGGGAGAGCAAACTGCTCGTGGACACGGTCATCGGTCAGAAGGACAGGT
++
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFF
+@ERR4998593.3 3 length=151
+GNGGTGCTCGACGGTGGCTCGGCGGATGCGCATGGCGTCGGGCCTGCGGTCCAGCCGCTCCCGCATGGCGTCGATCACCGCCTCATGCTCCCAGCGTTTGATGCGGCGCTCCTTGCCGCTCGTACACCGGCTCTTCAGCGGGCAGCCGGCGta</code></pre>
+<p>{: .output}</p>
+<pre><code>$ tail ERR4998593_1.fastq</code></pre>
+<p>{: .bash}</p>
+<pre><code>+
+FFF:F,FF:FFFFFF:F,:FFF,FF:FF,FFF::F:F,FF,FF,FFF,FFFFFF:FFFFFFF,F,,FFF:FFFF:,FFFF:FF::F:FFF,F:FFFF,:FFFFF,F:F:FF,FF:F:FFFF:FFF:FFF::FF:FF:,::FF,FF:,F,FF
+@ERR4998593.55595926 55595926 length=151
+CAGTACAACGTTCGCTCCCTGAATTTCTGTTTCTCGGCCGGCGAAGCAATTGCTGTGGCTATCCAGGAGCGGTTCAAGCGGATGTTCGGCGTCGAAATTACGGAAGGCTGCGGGATGACCGAACTGCAAATTTACTCCATGAATCCGCCAT
++
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFF:FFFFFFF:FF:FFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+@ERR4998593.34263610 34263610 length=151
+ACGCCCCACAGGGCGGCACCGACGCCGCCGCCCGGGCCCGCCGGCCCGCCCCGGTGGGCACCGGTTGCCACTGCGGCTTGCTCGGCCGTCTCACTCACTTGGACACACTTCCGTTCTTCACCGTCTCCACTGGCCGGCTAGACCGGTCCCG
++
+FFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,FFF,FFFF:FFFFFFFF,FFFFFF::F:F,FFFFFF,FFFFFFFFFFFFF,F:F:FF,FFFF</code></pre>
+<p>{: .output}</p>
+<p>The <code>-n</code> option to either of these commands can be used to print the first or last <code>n</code> lines of a file.</p>
+<pre><code>$ head -n 1 ERR4998593_1.fastq</code></pre>
+<p>{: .bash}</p>
+<pre><code>@ERR4998593.40838091 40838091 length=151</code></pre>
+<p>{: .output}</p>
+<pre><code>$ tail -n 1 ERR4998593_1.fastq</code></pre>
+<p>{: .bash}</p>
+<pre><code>F:FFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFF:FFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFF:FFF:FFFFFFFFFFFFFF:FFFFFF:FF:FFFFFFFFFFFFFFFFFFFFFF,F,FFF,FFFFFF,FFFF</code></pre>
+<p>{: .output}</p>
+</section>
+</section>
+<section id="creating-moving-copying-and-removing-files" class="level2">
+<h2 class="anchored" data-anchor-id="creating-moving-copying-and-removing-files">Creating, moving, copying, and removing files</h2>
+<p>Now we can move around in the file structure, look at files, and search files. But what if we want to copy files or move them around or get rid of them? Most of the time, you can do these sorts of file manipulations without the command line, but there will be some cases (like when you’re working with a remote computer like we are for this lesson) where it will be impossible. You’ll also find that you may be working with hundreds of files and want to do similar manipulations to all of those files. In cases like this, it’s much faster to do these operations at the command line.</p>
+<p>We’ll continue looking at our large Illumina sequencing files for the next part of the lesson.</p>
+<section id="copying-files" class="level3">
+<h3 class="anchored" data-anchor-id="copying-files">Copying Files</h3>
+<p>When working with computational data, it’s important to keep a safe copy of that data that can’t be accidentally overwritten or deleted. For this lesson, our raw data is our FASTQ files.</p>
+<p>First, let’s make a copy of one of our FASTQ files using the <code>cp</code> command.</p>
+<p>Navigate to the <code>cs_course/data/illumina_fastq</code> directory and enter:</p>
+<pre><code>$ cp ERR4998593_1.fastq ERR4998593_1_copy.fastq
+$ ls -F</code></pre>
+<p>{: .bash}</p>
+<pre><code>ERR4998593_1.fastq  ERR4998593_1_copy.fastq  ERR4998593_2.fastq</code></pre>
+<p>{: .output} The prompt will disappear for up to two minutes and reappear when the command is completed and the backup is made.</p>
+<p>We now have two copies of the <code>ERR4998593_1.fastq</code> file, one of them named <code>ERR4998593_1_copy.fastq</code>. We’ll move this file to a new directory called <code>backup</code> where we’ll store our backup data files.</p>
+</section>
+<section id="creating-directories" class="level3">
+<h3 class="anchored" data-anchor-id="creating-directories">Creating Directories</h3>
+<p>The <code>mkdir</code> command is used to make a directory. Enter <code>mkdir</code>followed by a space, then the directory name you want to create:</p>
+<pre><code>$ mkdir backup</code></pre>
+<p>{: .bash}</p>
+</section>
+<section id="moving-renaming-files-and-directories" class="level3">
+<h3 class="anchored" data-anchor-id="moving-renaming-files-and-directories">Moving / Renaming files and directories</h3>
+<p>We can now move our backup file to this directory. We can move files around using the command <code>mv</code>:</p>
+<pre><code>$ mv ERR4998593_1_copy.fastq backup
+$ ls backup</code></pre>
+<p>{: .bash}</p>
+<pre><code>ERR4998593_1_copy.fastq</code></pre>
+<p>{: .output}</p>
+<p>The <code>mv</code> command is also how you rename files. Let’s rename this file to make it clear that this is a backup:</p>
+<pre><code>$ cd backup
+$ mv ERR4998593_1_copy.fastq ERR4998593_1_backup.fastq
+$ ls</code></pre>
+<p>{: .bash}</p>
+<pre><code>ERR4998593_1_backup.fastq</code></pre>
+<p>{: .output}</p>
+</section>
+<section id="removing-files-and-directories" class="level3">
+<h3 class="anchored">Removing files and directories</h3>
+<p>You can delete or remove files with the <code>rm</code> command:</p>
+<pre><code>$ rm ERR4998593_1_backup.fastq</code></pre>
+<p>{: .bash}</p>
+<p><strong>Important</strong>: The <code>rm</code> command permanently removes the file. Be careful with this command. It doesn’t just nicely put the files in the recycling. They’re really gone.</p>
+<p>By default, <code>rm</code> will not delete directories. You can tell <code>rm</code> to delete a directory using the <code>-r</code> (recursive) option. Let’s delete the backup directory we just made:</p>
+<pre><code>$ cd ..
+$ rm -r backup</code></pre>
+<p>{: .bash}</p>
+<p>This will delete not only the directory, but all files within the directory.</p>
+<blockquote class="blockquote">
+<h2 id="exercise-3" class="anchored" data-anchor-id="removing-files-and-directories">Exercise</h2>
+<p>Starting in the <code>illumina_fastq</code> directory, do the following: 1. Make sure that you have deleted your backup directory and all files it contains.<br>
+2. Create a backup of each of your FASTQ files using <code>cp</code>. (Note: You’ll need to do this individually for each of the two FASTQ files. We haven’t learned yet how to do this with a wildcard.)<br>
+3. Use a wildcard to move all of your backup files to a new backup directory. 4. It doesn’t make sense to keep our backup directory inside the directory it is backing up. What if we accidentally delete the <code>illumina_fastq</code> directory? To fix this, move your new backup directory out of <code>illumina_fastq</code> and into the parent folder, <code>data</code>.</p>
+<blockquote class="blockquote">
+<h2 id="solution-3" class="anchored">Solution</h2>
+<ol type="1">
+<li><code>rm -r backup</code><br>
+</li>
+<li><code>cp ERR4998593_1.fastq ERR4998593_1_backup.fastq</code> and <code>cp ERR4998593_2.fastq ERR4998593_2_backup.fastq</code><br>
+</li>
+<li><code>mkdir backup</code> and <code>mv *_backup.fastq backup</code></li>
+<li><code>mv backup ..</code> or <code>mv backup ~/cs_course/data/</code> (note that you do not need to use the -r flag to move directories like you do when deleting them)</li>
+</ol>
+<p>It’s always a good idea to check your work. Move to the <code>data</code> folder with <code>cd ..</code> and then list the contents of <code>backup</code> with <code>ls -l backup</code>. You should see something like: ~~~ -rw-rw-r– 1 csuser csuser 2811886584 Feb 22 11:25 ERR4998593_1_backup.fastq -rw-rw-r– 1 csuser csuser 2302264784 Feb 22 11:29 ERR4998593_2_backup.fastq</p>
+<p>~~~ {: .output} {: .solution} {: .challenge}</p>
+</blockquote>
+</blockquote>
+<p>Here is what your file structure should look like at the end of this episode: <img src="../fig/file_tree_02_ep2.png" class="img-fluid" alt="A file hierarchy tree">{:width=“500px”}</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/Cloud-SPAN\.github\.io\/nercMtGn-bashAutomation\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/lesson02-using-the-command-line/01-navigating-file-directories.html" class="pagination-link" aria-label="Navigating Files and Directories">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Navigating Files and Directories</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/lesson02-using-the-command-line/03-redirection.html" class="pagination-link" aria-label="Redirection">
+        <span class="nav-page-text">Redirection</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0</a> 2021–24 by <a href="https://cloud-span.york.ac.uk/">Cloud-SPAN</a></p>
+</div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="../../about.qmd">
+<p>About</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../docs/faq/index.qmd">
+<p>FAQ</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../license.qmd">
+<p>License</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../trademark.qmd">
+<p>Trademark</p>
+</a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson02-using-the-command-line/02-working-with-file.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/quarto_pub">
+      <i class="bi bi-twitter" role="img" aria-label="Quarto Twitter">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/quarto-dev/quarto-cli">
+      <i class="bi bi-github" role="img" aria-label="Quarto GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://quarto.org/docs/blog/index.xml">
+      <i class="bi bi-rss" role="img" aria-label="Quarto Blog RSS">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
